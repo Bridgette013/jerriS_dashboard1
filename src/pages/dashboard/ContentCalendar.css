@@ -468,7 +468,7 @@
   }
   
   .day-column {
-    min-height: auto;
+    min-height: 0;
   }
   
   .day-header {
