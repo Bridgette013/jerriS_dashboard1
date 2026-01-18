@@ -1,45 +1,87 @@
 import React from 'react';
 import { Routes, Route, NavLink } from 'react-router-dom';
+
+// Public pages
 import Home from './pages/Home';
-import Services from './pages/Services';
+import Shop from './pages/Shop';
+import About from './pages/About';
 import Contact from './pages/Contact';
-import Podcast from './pages/Podcast';
+
+// Dashboard pages
+import Dashboard from './pages/dashboard/Dashboard';
+import ContentCalendar from './pages/dashboard/ContentCalendar';
+import LinkTracker from './pages/dashboard/LinkTracker';
+import Analytics from './pages/dashboard/Analytics';
+
 import './App.css';
 
-const Layout = ({ children }) => {
+const PublicLayout = ({ children }) => {
   return (
     <div className="site">
       <header className="site-header">
         <div className="brand">
-          <span className="brand-title">Sierra Vox Studio</span>
-          <span className="brand-subtitle">Voice &amp; Narrative Studio</span>
+          <span className="brand-title">Jerri S.</span>
+          <span className="brand-subtitle">Family • Lifestyle • Real Life</span>
         </div>
         <nav className="site-nav">
           <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
             Home
           </NavLink>
-          <NavLink to="/services" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-            Services
+          <NavLink to="/shop" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            Shop My Favorites
           </NavLink>
-          <NavLink to="/podcast" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-            Podcast
+          <NavLink to="/about" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
+            About
           </NavLink>
           <NavLink to="/contact" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
-            Contact
+            Collabs
           </NavLink>
         </nav>
-        <a className="header-cta" href="mailto:studio@twistedtiffany.com">
-          Book a Session
+        <a className="header-cta" href="https://facebook.com/jerris" target="_blank" rel="noopener noreferrer">
+          Follow Along
         </a>
       </header>
       <main>{children}</main>
       <footer className="site-footer">
         <div>
-          <p className="footer-title">Sierra Vox Studio Voice &amp; Narrative Studio</p>
-          <p className="footer-subtitle">Broadcast-ready voice work for story-driven brands.</p>
+          <p className="footer-title">Jerri S.</p>
+          <p className="footer-subtitle">Family content creator sharing the real, messy, beautiful life.</p>
         </div>
-        <p className="footer-meta">© {new Date().getFullYear()} Sierra Vox Studio. All rights reserved.</p>
+        <p className="footer-meta">© {new Date().getFullYear()} Jerri S. All rights reserved.</p>
       </footer>
+    </div>
+  );
+};
+
+const DashboardLayout = ({ children }) => {
+  return (
+    <div className="dashboard-layout bg-brand-carbon text-brand-white">
+      <aside className="dashboard-sidebar">
+        <div className="sidebar-brand">
+          <span className="sidebar-title">Jerri S.</span>
+          <span className="sidebar-subtitle">Creator Dashboard</span>
+        </div>
+        <nav className="sidebar-nav">
+          <NavLink to="/dashboard" end className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+            📊 Overview
+          </NavLink>
+          <NavLink to="/dashboard/calendar" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+            📅 Content Calendar
+          </NavLink>
+          <NavLink to="/dashboard/links" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+            🔗 Link Tracker
+          </NavLink>
+          <NavLink to="/dashboard/analytics" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+            📈 Analytics
+          </NavLink>
+        </nav>
+        <div className="sidebar-footer">
+          <NavLink to="/" className="sidebar-link back-link">
+            ← Back to Site
+          </NavLink>
+        </div>
+      </aside>
+      <main className="dashboard-main">{children}</main>
     </div>
   );
 };
@@ -47,44 +89,81 @@ const Layout = ({ children }) => {
 const App = () => {
   return (
     <Routes>
+      {/* Public routes */}
       <Route
         path="/"
         element={
-          <Layout>
+          <PublicLayout>
             <Home />
-          </Layout>
+          </PublicLayout>
         }
       />
       <Route
-        path="/services"
+        path="/shop"
         element={
-          <Layout>
-            <Services />
-          </Layout>
+          <PublicLayout>
+            <Shop />
+          </PublicLayout>
         }
       />
       <Route
-        path="/podcast"
+        path="/about"
         element={
-          <Layout>
-            <Podcast />
-          </Layout>
+          <PublicLayout>
+            <About />
+          </PublicLayout>
         }
       />
       <Route
         path="/contact"
         element={
-          <Layout>
+          <PublicLayout>
             <Contact />
-          </Layout>
+          </PublicLayout>
+        }
+      />
+      
+      {/* Dashboard routes */}
+      <Route
+        path="/dashboard"
+        element={
+          <DashboardLayout>
+            <Dashboard />
+          </DashboardLayout>
         }
       />
       <Route
+        path="/dashboard/calendar"
+        element={
+          <DashboardLayout>
+            <ContentCalendar />
+          </DashboardLayout>
+        }
+      />
+      <Route
+        path="/dashboard/links"
+        element={
+          <DashboardLayout>
+            <LinkTracker />
+          </DashboardLayout>
+        }
+      />
+      <Route
+        path="/dashboard/analytics"
+        element={
+          <DashboardLayout>
+            <Analytics />
+          </DashboardLayout>
+        }
+      />
+      
+      {/* Fallback */}
+      <Route
         path="*"
         element={
-          <Layout>
+          <PublicLayout>
             <Home />
-          </Layout>
+          </PublicLayout>
         }
       />
     </Routes>

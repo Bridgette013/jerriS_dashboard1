@@ -7,25 +7,32 @@ export default {
   theme: {
     extend: {
       colors: {
-        // Tiffany Twisted luxury theme colors
-        'tiff-pink': '#F8BBD9',
-        'tiff-rose': '#E91E63', 
-        'tiff-black': '#0A0A0A',
-        'tiff-charcoal': '#1A1A1A',
-        'tiff-surface': '#2A2A2A',
-        'tiff-gold': '#FFD700',
-        'tiff-champagne': '#F7E7CE',
-        'tiff-text': '#F5F5F5',
-        'tiff-muted': '#B0B0B0',
-        'tiff-divider': '#3A3A3A',
+        // Jerri S. Brand Colors
+        'brand-onyx': '#0A0A0A',           // Primary dark
+        'brand-carbon': '#1F1F1F',          // Secondary dark / surfaces
+        'brand-purple': '#5F00B8',          // Ultrasonic Blue (accent)
+        'brand-lavender': '#C485FF',        // Bright Lavender (highlight)
+        'brand-aqua': '#60E1E0',            // Pearl Aqua (success/pop)
+        'brand-grey': '#E0E0E0',            // Alabaster Grey (borders/muted)
+        'brand-white': '#FFFFFF',           // White (text on dark)
+        
+        // Semantic mappings
+        'brand-primary': '#5F00B8',         // Main accent
+        'brand-accent': '#60E1E0',          // Secondary accent
+        'brand-success': '#60E1E0',         // Success states
+        'brand-surface': '#1F1F1F',         // Card backgrounds
+        'brand-text': '#FFFFFF',            // Primary text
+        'brand-muted': '#E0E0E0',           // Muted text
+        'brand-divider': '#2A2A2A',         // Subtle dividers
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
-        script: ['Dancing Script', 'cursive'],
+        sans: ['Poppins', 'sans-serif'],        // Clean, modern
+        display: ['Montserrat', 'sans-serif'],  // Headers - bold & stylish
       },
       backgroundImage: {
-        'gradient-tiff': 'linear-gradient(135deg, #F8BBD9 0%, #E91E63 50%, #FFD700 100%)',
-        'gradient-dark': 'linear-gradient(135deg, #0A0A0A 0%, #2A2A2A 100%)',
+        'gradient-brand': 'linear-gradient(135deg, #5F00B8 0%, #60E1E0 100%)',
+        'gradient-purple': 'linear-gradient(135deg, #5F00B8 0%, #C485FF 100%)',
+        'gradient-dark': 'linear-gradient(135deg, #0A0A0A 0%, #1F1F1F 100%)',
       }
     },
   },

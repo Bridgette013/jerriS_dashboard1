@@ -2,24 +2,72 @@ import React from 'react';
 
 const Contact = () => {
   return (
-    <div className="page">
-      <section className="section contact-section">
-        <div className="section-header">
-          <h3>Get in Touch</h3>
-          <p>
-            Ready to start? I’m currently accepting explainer, narrative, and voice‑led creative
-            projects.
-          </p>
+    <div className="page contact-page" style={{ padding: '3rem' }}>
+      <div style={{ maxWidth: '600px', margin: '0 auto' }}>
+        <h1 style={{ 
+          fontFamily: 'Montserrat, sans-serif', 
+          fontSize: '2rem', 
+          marginBottom: '0.5rem',
+          background: 'linear-gradient(135deg, #C485FF 0%, #60E1E0 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'
+        }}>
+          Let's Work Together
+        </h1>
+        <p style={{ color: '#888', marginBottom: '2rem' }}>
+          Interested in collaborating? I'd love to hear from you.
+        </p>
+        
+        <div style={{ 
+          background: '#1F1F1F', 
+          borderRadius: '12px', 
+          padding: '2rem',
+          border: '1px solid #2A2A2A'
+        }}>
+          <div style={{ marginBottom: '1.5rem' }}>
+            <h3 style={{ color: '#C485FF', fontSize: '1rem', marginBottom: '0.5rem' }}>
+              What I'm open to:
+            </h3>
+            <ul style={{ color: '#E0E0E0', paddingLeft: '1.25rem', lineHeight: '1.8' }}>
+              <li>Sponsored content & brand partnerships</li>
+              <li>Product reviews & features</li>
+              <li>Affiliate collaborations</li>
+              <li>UGC creation</li>
+            </ul>
+          </div>
+          
+          <div style={{ marginBottom: '1.5rem' }}>
+            <h3 style={{ color: '#C485FF', fontSize: '1rem', marginBottom: '0.5rem' }}>
+              My audience:
+            </h3>
+            <p style={{ color: '#E0E0E0', lineHeight: '1.8' }}>
+              Moms aged 25-44, primarily US-based, interested in family life, 
+              home organization, and practical products that make life easier.
+            </p>
+          </div>
+          
+          <div>
+            <h3 style={{ color: '#C485FF', fontSize: '1rem', marginBottom: '0.5rem' }}>
+              Get in touch:
+            </h3>
+            <a 
+              href="mailto:collab@jerris.com"
+              style={{
+                display: 'inline-block',
+                background: 'linear-gradient(135deg, #5F00B8 0%, #7B2FD4 100%)',
+                color: 'white',
+                padding: '0.75rem 1.5rem',
+                borderRadius: '8px',
+                textDecoration: 'none',
+                fontWeight: '600',
+                marginTop: '0.5rem'
+              }}
+            >
+              collab@jerris.com
+            </a>
+          </div>
         </div>
-        <div className="contact-card">
-          <p className="contact-line">
-            Email: <a href="mailto:studio@twistedtiffany.com">studio@twistedtiffany.com</a>
-          </p>
-          <p className="contact-note">
-            Files delivered in WAV or 320kbps MP3; typical turnaround 24–48 hours.
-          </p>
-        </div>
-      </section>
+      </div>
     </div>
   );
 };
