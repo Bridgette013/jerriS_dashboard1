@@ -198,7 +198,7 @@ const Dashboard = () => {
     <div className="dashboard-overview">
       <div className="dashboard-header">
         <div>
-          <h1>Hey, Jerri ✨</h1>
+          <h1>Hey, Jerri 💜</h1>
           <p className="dashboard-subtitle">Here's how your content is performing</p>
         </div>
         <div className="header-date">
