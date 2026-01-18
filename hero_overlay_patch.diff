@@ -1,0 +1,79 @@
+*** Begin Patch
+*** Update File: src/App.css
+@@ .hero {
+   display: grid;
+   gap: 40px;
+   align-items: center;
+   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+   padding: 40px 0 60px;
++  /* Ensure the hero has enough vertical space for the illustration */
++  min-height: 80vh;
++  /* Allow absolutely positioned children to sit over the grid */
++  position: relative;
++  overflow: hidden;
+ }
+
+@@ .hero-image img {
+-  width: 100%;
+-  border-radius: 24px;
+-  object-fit: cover;
+-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+-  border: 1px solid rgba(248, 187, 217, 0.2);
++  /* Position the hero illustration on the bottom right of the hero */
++  position: absolute;
++  bottom: 0;
++  right: 0;
++  height: 100%;
++  width: auto;
++  /* Remove the box and rounded corners for overlay effect */
++  border-radius: 0;
++  object-fit: contain;
++  box-shadow: none;
++  border: none;
++  /* Fade the image slightly so content stays readable */
++  opacity: 0.95;
++  pointer-events: none;
++  z-index: 1;
+ }
+
+*** End Patch
+*** Begin Patch
+*** Update File: src/App.css
+@@
+ .hero-content h1 {
+   font-size: clamp(2.4rem, 3vw, 3rem);
+   margin: 0 0 8px;
+ }
++
++/* Keep the hero content above the overlay image */
++.hero-content {
++  position: relative;
++  z-index: 2;
++}
+*** End Patch
+*** Begin Patch
+*** Update File: src/pages/Home.jsx
+@@ const Home = () => {
+       <section className="hero">
+         <div className="hero-content">
+@@
+             <Link className="button ghost" to="/contact">
+               Request a Custom Read
+             </Link>
+           </div>
+         </div>
+-        <div className="hero-image">
+-          <img
+-            src="/hero_image.jpg"
+-            alt="Twisted Tiffany studio headshot wearing headphones"
+-          />
+-        </div>
++        {/* The hero overlay illustration sits behind the content */}
++        <div className="hero-image">
++          <img
++            src="/hero_bg.png"
++            alt="Illustration of Tiffany with microphone and headphones"
++          />
++        </div>
+       </section>
+*** End Patch
