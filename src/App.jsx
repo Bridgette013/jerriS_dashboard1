@@ -21,7 +21,7 @@ const PublicLayout = ({ children }) => {
       <header className="site-header">
         <div className="brand">
           <span className="brand-title">Jerri S.</span>
-          <span className="brand-subtitle">Family • Lifestyle • Real Life</span>
+          <span className="brand-subtitle">The chaos. The clutter. The real.</span>
         </div>
         <nav className="site-nav">
           <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
@@ -37,7 +37,7 @@ const PublicLayout = ({ children }) => {
             Collabs
           </NavLink>
         </nav>
-        <a className="header-cta" href="https://facebook.com/jerris" target="_blank" rel="noopener noreferrer">
+        <a className="header-cta" href="https://facebook.com/jerri.winters" target="_blank" rel="noopener noreferrer">
           Follow Along
         </a>
       </header>
@@ -45,7 +45,7 @@ const PublicLayout = ({ children }) => {
       <footer className="site-footer">
         <div>
           <p className="footer-title">Jerri S.</p>
-          <p className="footer-subtitle">Family content creator sharing the real, messy, beautiful life.</p>
+          <p className="footer-subtitle">Single mom of 4. No filter. No shame.</p>
         </div>
         <p className="footer-meta">© {new Date().getFullYear()} Jerri S. All rights reserved.</p>
       </footer>
