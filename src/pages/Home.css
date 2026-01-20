@@ -809,11 +809,10 @@
 @media (max-width: 899px) {
   .hero {
     padding-top: 2rem;
-    min-height: auto;
   }
   
   .hero-container {
-    min-height: auto;
+    min-height: 0;
   }
   
   .hero-grid-lines {
