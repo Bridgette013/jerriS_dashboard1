@@ -103,7 +103,7 @@ const CalendarPreview = ({ items }) => {
     <div className="calendar-preview">
       <div className="section-header">
         <h3>Upcoming Content</h3>
-        <a href="/dashboard/calendar" className="view-all">View Calendar →</a>
+        <a href="/calendar" className="view-all">View Calendar →</a>
       </div>
       <div className="calendar-list">
         {items.map(item => (
@@ -129,7 +129,7 @@ const TopContent = ({ items }) => (
   <div className="top-content">
     <div className="section-header">
       <h3>Top Performing (This Month)</h3>
-      <a href="/dashboard/analytics" className="view-all">See All →</a>
+      <a href="/hub" className="view-all">See All →</a>
     </div>
     <div className="content-list">
       {items.map((item, index) => (
@@ -154,7 +154,7 @@ const AffiliatePerformance = ({ links }) => (
   <div className="affiliate-performance">
     <div className="section-header">
       <h3>Affiliate Link Performance</h3>
-      <a href="/dashboard/links" className="view-all">Manage Links →</a>
+      <a href="/links" className="view-all">Manage Links →</a>
     </div>
     <div className="affiliate-table">
       <div className="table-header">
