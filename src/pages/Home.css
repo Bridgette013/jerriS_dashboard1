@@ -1,0 +1,495 @@
+/* ==========================================
+   HOME PAGE - Jerri S. Landing
+   Brand: Warm chaos, real mom energy
+   Colors: Dark + Purple/Aqua accents
+   ========================================== */
+
+.home-page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  overflow-x: hidden;
+}
+
+/* ==========================================
+   HERO SECTION
+   ========================================== */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(
+    circle,
+    rgba(95, 0, 184, 0.3) 0%,
+    rgba(96, 225, 224, 0.1) 40%,
+    transparent 70%
+  );
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 500px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero Image */
+.hero-image-container {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: 0 auto 1.5rem;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 50%;
+  border: 4px solid var(--color-purple);
+  box-shadow: 
+    0 0 0 4px var(--color-bg),
+    0 0 40px rgba(95, 0, 184, 0.4),
+    0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.hero-image-ring {
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid var(--color-aqua);
+  opacity: 0.5;
+  animation: pulse-ring 2s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.3;
+  }
+}
+
+/* Hero Text */
+.hero-name {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero-tagline {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  color: var(--color-aqua);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+.hero-bio {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.hero-highlight {
+  color: var(--color-lavender);
+  font-style: italic;
+}
+
+/* Social Buttons */
+.social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.social-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  border-radius: 50px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+.social-btn.facebook {
+  background: linear-gradient(135deg, #1877f2, #0d5bbf);
+  color: white;
+}
+
+.social-btn.facebook:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(24, 119, 242, 0.4);
+}
+
+.social-btn.youtube {
+  background: linear-gradient(135deg, #ff0000, #cc0000);
+  color: white;
+}
+
+.social-btn.youtube:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+}
+
+/* Stats */
+.stats-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  padding: 1.25rem 2rem;
+  background: var(--color-surface);
+  border-radius: 16px;
+  border: 1px solid rgba(196, 133, 255, 0.2);
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stat-number {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-aqua);
+}
+
+.stat-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-divider {
+  width: 1px;
+  height: 30px;
+  background: rgba(196, 133, 255, 0.3);
+}
+
+/* ==========================================
+   CREW SECTION
+   ========================================== */
+
+.crew-section {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.section-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 0.5rem;
+}
+
+.section-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: var(--color-muted);
+  margin-bottom: 2rem;
+}
+
+.crew-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+}
+
+@media (min-width: 600px) {
+  .crew-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .crew-card-large {
+    grid-column: span 2;
+  }
+}
+
+.crew-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4/3;
+  background: var(--color-surface);
+}
+
+.crew-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.crew-card:hover img {
+  transform: scale(1.05);
+}
+
+.crew-card-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+  background: linear-gradient(transparent, rgba(10, 10, 10, 0.9));
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.crew-card-overlay span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  font-weight: 600;
+}
+
+.crew-tag {
+  font-size: 0.75rem !important;
+  color: var(--color-aqua) !important;
+  font-weight: 400 !important;
+}
+
+.crew-names {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: var(--color-muted);
+}
+
+.crew-names .dot {
+  color: var(--color-purple);
+}
+
+/* ==========================================
+   MESSAGE SECTION
+   ========================================== */
+
+.message-section {
+  padding: 4rem 2rem;
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(95, 0, 184, 0.1) 50%,
+    transparent 100%
+  );
+}
+
+.message-content {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+
+.quote-mark {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 6rem;
+  color: var(--color-purple);
+  opacity: 0.3;
+  line-height: 0.5;
+  margin-bottom: 1rem;
+}
+
+.message-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  color: var(--color-muted);
+  line-height: 1.8;
+  margin-bottom: 1.5rem;
+}
+
+.message-emphasis {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-lavender);
+  line-height: 1.5;
+}
+
+/* ==========================================
+   QUICK LINKS SECTION
+   ========================================== */
+
+.links-section {
+  padding: 2rem;
+}
+
+.quick-links {
+  max-width: 500px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.quick-link {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--color-surface);
+  border: 1px solid rgba(196, 133, 255, 0.2);
+  border-radius: 16px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.quick-link:hover {
+  background: rgba(95, 0, 184, 0.2);
+  border-color: var(--color-purple);
+  transform: translateX(4px);
+}
+
+.quick-link-icon {
+  font-size: 1.5rem;
+}
+
+.quick-link-text {
+  flex: 1;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--color-text);
+}
+
+.quick-link-arrow {
+  font-size: 1.25rem;
+  color: var(--color-lavender);
+  transition: transform 0.3s ease;
+}
+
+.quick-link:hover .quick-link-arrow {
+  transform: translateX(4px);
+}
+
+/* ==========================================
+   CTA SECTION
+   ========================================== */
+
+.cta-section {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.cta-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.1rem;
+  color: var(--color-muted);
+  margin-bottom: 1rem;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, var(--color-purple), var(--color-lavender));
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(95, 0, 184, 0.4);
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (min-width: 768px) {
+  .hero-image-container {
+    width: 220px;
+    height: 220px;
+  }
+  
+  .hero-name {
+    font-size: 3rem;
+  }
+  
+  .hero-tagline {
+    font-size: 1.25rem;
+  }
+  
+  .social-links {
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  .social-btn {
+    padding: 0.875rem 2rem;
+  }
+  
+  .stats-row {
+    gap: 2.5rem;
+    padding: 1.5rem 3rem;
+  }
+  
+  .stat-number {
+    font-size: 2rem;
+  }
+}
