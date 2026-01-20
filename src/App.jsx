@@ -1,11 +1,12 @@
 import React from 'react';
-import { Routes, Route, NavLink } from 'react-router-dom';
+import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
 
 // Public pages
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Login from './pages/Login';
 
 // Dashboard pages
 import Dashboard from './pages/dashboard/Dashboard';
@@ -13,7 +14,29 @@ import ContentCalendar from './pages/dashboard/ContentCalendar';
 import LinkTracker from './pages/dashboard/LinkTracker';
 import Hub from './pages/dashboard/Hub';
 
+// Auth
+import { useAuth } from './context/AuthContext';
+
 import './App.css';
+
+// Protected Route wrapper
+const ProtectedRoute = ({ children }) => {
+  const { isAuthenticated, isLoading } = useAuth();
+
+  if (isLoading) {
+    return (
+      <div className="loading-screen">
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
 
 const PublicLayout = ({ children }) => {
   return (
@@ -54,6 +77,12 @@ const PublicLayout = ({ children }) => {
 };
 
 const DashboardLayout = ({ children }) => {
+  const { logout } = useAuth();
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <div className="dashboard-layout bg-brand-carbon text-brand-white">
       <aside className="dashboard-sidebar">
@@ -79,6 +108,9 @@ const DashboardLayout = ({ children }) => {
           <NavLink to="/" className="sidebar-link back-link">
             ← Back to Site
           </NavLink>
+          <button onClick={handleLogout} className="sidebar-link logout-btn">
+            🚪 Logout
+          </button>
         </div>
       </aside>
       <main className="dashboard-main">{children}</main>
@@ -123,37 +155,48 @@ const App = () => {
         }
       />
 
-      {/* Dashboard routes */}
+      {/* Login route */}
+      <Route path="/login" element={<Login />} />
+
+      {/* Dashboard routes (protected) */}
       <Route
         path="/dashboard"
         element={
-          <DashboardLayout>
-            <Dashboard />
-          </DashboardLayout>
+          <ProtectedRoute>
+            <DashboardLayout>
+              <Dashboard />
+            </DashboardLayout>
+          </ProtectedRoute>
         }
       />
       <Route
         path="/dashboard/calendar"
         element={
-          <DashboardLayout>
-            <ContentCalendar />
-          </DashboardLayout>
+          <ProtectedRoute>
+            <DashboardLayout>
+              <ContentCalendar />
+            </DashboardLayout>
+          </ProtectedRoute>
         }
       />
       <Route
         path="/dashboard/links"
         element={
-          <DashboardLayout>
-            <LinkTracker />
-          </DashboardLayout>
+          <ProtectedRoute>
+            <DashboardLayout>
+              <LinkTracker />
+            </DashboardLayout>
+          </ProtectedRoute>
         }
       />
       <Route
         path="/dashboard/hub"
         element={
-          <DashboardLayout>
-            <Hub />
-          </DashboardLayout>
+          <ProtectedRoute>
+            <DashboardLayout>
+              <Hub />
+            </DashboardLayout>
+          </ProtectedRoute>
         }
       />
 

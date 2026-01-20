@@ -1,87 +1,88 @@
 import React, { useState } from 'react';
+import { useCloudSync, useSyncedState } from '../../hooks/useCloudSync';
 import './LinkTracker.css';
 
-// Mock data - wire up to real data source later
-const initialLinks = [
-  { 
-    id: 1, 
-    product: 'Kitchen organizer bins (set of 6)', 
+// Default data for new users
+const defaultLinks = [
+  {
+    id: 1,
+    product: 'Kitchen organizer bins (set of 6)',
     category: 'Home & Kitchen',
     amazonUrl: 'https://amzn.to/abc123',
-    clicks: 342, 
-    conversions: 18, 
+    clicks: 342,
+    conversions: 18,
     conversionRate: 5.3,
-    earnings: 43.20, 
+    earnings: 43.20,
     lastUsed: '2026-01-15',
     timesUsed: 8,
     avgEarningsPerUse: 5.40,
     notes: 'Best performer - use in morning routine content'
   },
-  { 
-    id: 2, 
-    product: 'Kids lunch containers (4-pack)', 
+  {
+    id: 2,
+    product: 'Kids lunch containers (4-pack)',
     category: 'Kitchen',
     amazonUrl: 'https://amzn.to/def456',
-    clicks: 287, 
-    conversions: 12, 
+    clicks: 287,
+    conversions: 12,
     conversionRate: 4.2,
-    earnings: 28.80, 
+    earnings: 28.80,
     lastUsed: '2026-01-12',
     timesUsed: 5,
     avgEarningsPerUse: 5.76,
     notes: 'Good for back-to-school content'
   },
-  { 
-    id: 3, 
-    product: 'Cable management kit', 
+  {
+    id: 3,
+    product: 'Cable management kit',
     category: 'Electronics',
     amazonUrl: 'https://amzn.to/ghi789',
-    clicks: 198, 
-    conversions: 8, 
+    clicks: 198,
+    conversions: 8,
     conversionRate: 4.0,
-    earnings: 19.20, 
+    earnings: 19.20,
     lastUsed: '2026-01-10',
     timesUsed: 3,
     avgEarningsPerUse: 6.40,
     notes: 'Surprisingly good - try in office setup content'
   },
-  { 
-    id: 4, 
-    product: 'Bathroom caddy organizer', 
+  {
+    id: 4,
+    product: 'Bathroom caddy organizer',
     category: 'Home & Kitchen',
     amazonUrl: 'https://amzn.to/jkl012',
-    clicks: 156, 
-    conversions: 5, 
+    clicks: 156,
+    conversions: 5,
     conversionRate: 3.2,
-    earnings: 12.00, 
+    earnings: 12.00,
     lastUsed: '2026-01-08',
     timesUsed: 4,
     avgEarningsPerUse: 3.00,
     notes: ''
   },
-  { 
-    id: 5, 
-    product: 'Reusable storage bags', 
+  {
+    id: 5,
+    product: 'Reusable storage bags',
     category: 'Kitchen',
     amazonUrl: 'https://amzn.to/mno345',
-    clicks: 134, 
-    conversions: 7, 
+    clicks: 134,
+    conversions: 7,
     conversionRate: 5.2,
-    earnings: 16.80, 
+    earnings: 16.80,
     lastUsed: '2026-01-05',
     timesUsed: 6,
     avgEarningsPerUse: 2.80,
     notes: 'Eco-angle works well'
   },
-  { 
-    id: 6, 
-    product: 'LED night light (motion sensor)', 
+  {
+    id: 6,
+    product: 'LED night light (motion sensor)',
     category: 'Home',
     amazonUrl: 'https://amzn.to/pqr678',
-    clicks: 89, 
-    conversions: 4, 
+    clicks: 89,
+    conversions: 4,
     conversionRate: 4.5,
-    earnings: 9.60, 
+    earnings: 9.60,
     lastUsed: '2026-01-03',
     timesUsed: 2,
     avgEarningsPerUse: 4.80,
@@ -92,7 +93,11 @@ const initialLinks = [
 const categories = ['All', 'Home & Kitchen', 'Kitchen', 'Electronics', 'Home', 'Kids', 'Organization'];
 
 const LinkTracker = () => {
-  const [links, setLinks] = useState(initialLinks);
+  // Cloud sync
+  const cloudSync = useCloudSync();
+
+  // Synced links data
+  const [links, setLinks] = useSyncedState('links', defaultLinks, cloudSync);
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortBy, setSortBy] = useState('earnings');
   const [showAddModal, setShowAddModal] = useState(false);
