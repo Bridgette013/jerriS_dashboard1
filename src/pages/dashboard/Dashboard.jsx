@@ -1,95 +1,110 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Dashboard.css';
 
-// Mock data - replace with real data source later (Airtable, Supabase, JSON, etc.)
-const mockData = {
-  earnings: {
-    facebook: {
-      thisMonth: 847.32,
-      lastMonth: 612.50,
-      pending: 234.00
-    },
-    amazon: {
-      thisMonth: 156.78,
-      lastMonth: 98.45,
-      clicks: 1247,
-      conversions: 43
+const Dashboard = () => {
+  // Today's Focus
+  const [focus, setFocus] = useState(() => {
+    return localStorage.getItem('jerri_focus') || '';
+  });
+
+  // To-Do List
+  const [todos, setTodos] = useState(() => {
+    const saved = localStorage.getItem('jerri_todos');
+    return saved ? JSON.parse(saved) : [];
+  });
+  const [newTodo, setNewTodo] = useState('');
+
+  // Quick Notes
+  const [notes, setNotes] = useState(() => {
+    return localStorage.getItem('jerri_notes') || '';
+  });
+
+  // Quick Stats
+  const [stats, setStats] = useState(() => {
+    const saved = localStorage.getItem('jerri_stats');
+    return saved ? JSON.parse(saved) : {
+      followers: '',
+      monthlyEarnings: '',
+      pendingPayout: ''
+    };
+  });
+  const [editingStats, setEditingStats] = useState(false);
+
+  // Calendar data (read-only, from ContentCalendar)
+  const [upcoming, setUpcoming] = useState([]);
+
+  // Save effects
+  useEffect(() => {
+    localStorage.setItem('jerri_focus', focus);
+  }, [focus]);
+
+  useEffect(() => {
+    localStorage.setItem('jerri_todos', JSON.stringify(todos));
+  }, [todos]);
+
+  useEffect(() => {
+    localStorage.setItem('jerri_notes', notes);
+  }, [notes]);
+
+  useEffect(() => {
+    localStorage.setItem('jerri_stats', JSON.stringify(stats));
+  }, [stats]);
+
+  // Load upcoming content from calendar
+  useEffect(() => {
+    const calendarData = localStorage.getItem('jerri_calendar');
+    if (calendarData) {
+      const items = JSON.parse(calendarData);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      
+      const nextWeek = new Date(today);
+      nextWeek.setDate(nextWeek.getDate() + 7);
+
+      const upcomingItems = items
+        .filter(item => {
+          const itemDate = new Date(item.date);
+          return itemDate >= today && itemDate <= nextWeek;
+        })
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .slice(0, 5);
+
+      setUpcoming(upcomingItems);
     }
-  },
-  contentCalendar: [
-    { id: 1, date: '2026-01-19', type: 'reel', status: 'scheduled', title: 'Morning routine hack', hasAffiliate: true },
-    { id: 2, date: '2026-01-20', type: 'reel', status: 'idea', title: 'Kids lunch prep', hasAffiliate: true },
-    { id: 3, date: '2026-01-21', type: 'reel', status: 'idea', title: 'Amazon haul - kitchen', hasAffiliate: true },
-    { id: 4, date: '2026-01-22', type: 'story', status: 'scheduled', title: 'Day in my life', hasAffiliate: false },
-    { id: 5, date: '2026-01-23', type: 'reel', status: 'idea', title: 'Bedtime routine', hasAffiliate: false },
-  ],
-  topContent: [
-    { id: 1, title: 'The $12 organizer that changed everything', views: 45200, engagement: 8.2, earnings: 67.50 },
-    { id: 2, title: 'Morning chaos but make it aesthetic', views: 38100, engagement: 7.8, earnings: 0 },
-    { id: 3, title: '5 Amazon finds under $20', views: 31400, engagement: 9.1, earnings: 89.20 },
-  ],
-  affiliateLinks: [
-    { id: 1, product: 'Kitchen organizer bins', clicks: 342, conversions: 18, earnings: 43.20, lastUsed: '2026-01-15' },
-    { id: 2, product: 'Kids lunch containers', clicks: 287, conversions: 12, earnings: 28.80, lastUsed: '2026-01-12' },
-    { id: 3, product: 'Cable management kit', clicks: 198, conversions: 8, earnings: 19.20, lastUsed: '2026-01-10' },
-    { id: 4, product: 'Bathroom caddy', clicks: 156, conversions: 5, earnings: 12.00, lastUsed: '2026-01-08' },
-  ],
-  stats: {
-    followers: 12847,
-    followersGrowth: 847,
-    avgViews: 28400,
-    engagementRate: 6.8,
-    postsThisWeek: 4,
-    postsGoal: 5
-  }
-};
+  }, []);
 
-// Helper functions
-const formatCurrency = (amount) => `$${amount.toFixed(2)}`;
-const formatNumber = (num) => num.toLocaleString();
-const getPercentChange = (current, previous) => {
-  const change = ((current - previous) / previous) * 100;
-  return change > 0 ? `+${change.toFixed(1)}%` : `${change.toFixed(1)}%`;
-};
+  // To-Do functions
+  const addTodo = (e) => {
+    e.preventDefault();
+    if (!newTodo.trim()) return;
+    setTodos([...todos, { id: Date.now(), text: newTodo, done: false }]);
+    setNewTodo('');
+  };
 
-// Stat Card Component
-const StatCard = ({ label, value, subtext, trend, icon }) => (
-  <div className="stat-card">
-    <div className="stat-icon">{icon}</div>
-    <div className="stat-content">
-      <span className="stat-label">{label}</span>
-      <span className="stat-value">{value}</span>
-      {subtext && <span className={`stat-trend ${trend}`}>{subtext}</span>}
-    </div>
-  </div>
-);
+  const toggleTodo = (id) => {
+    setTodos(todos.map(t => 
+      t.id === id ? { ...t, done: !t.done } : t
+    ));
+  };
 
-// Earnings Card Component
-const EarningsCard = ({ title, amount, comparison, breakdown }) => (
-  <div className="earnings-card">
-    <h3>{title}</h3>
-    <div className="earnings-amount">{formatCurrency(amount)}</div>
-    {comparison && <div className={`earnings-comparison ${comparison.startsWith('+') ? 'positive' : 'negative'}`}>{comparison} vs last month</div>}
-    {breakdown && (
-      <div className="earnings-breakdown">
-        {breakdown.map((item, i) => (
-          <div key={i} className="breakdown-item">
-            <span>{item.label}</span>
-            <span>{item.value}</span>
-          </div>
-        ))}
-      </div>
-    )}
-  </div>
-);
+  const deleteTodo = (id) => {
+    setTodos(todos.filter(t => t.id !== id));
+  };
 
-// Content Calendar Preview
-const CalendarPreview = ({ items }) => {
-  const statusColors = {
-    scheduled: 'status-scheduled',
-    idea: 'status-idea',
-    posted: 'status-posted',
-    draft: 'status-draft'
+  const clearCompleted = () => {
+    setTodos(todos.filter(t => !t.done));
+  };
+
+  // Format date for display
+  const formatDate = (dateStr) => {
+    const date = new Date(dateStr);
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+
+    if (date.toDateString() === today.toDateString()) return 'Today';
+    if (date.toDateString() === tomorrow.toDateString()) return 'Tomorrow';
+    return date.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
   };
 
   const typeIcons = {
@@ -99,186 +114,165 @@ const CalendarPreview = ({ items }) => {
     live: '🔴'
   };
 
-  return (
-    <div className="calendar-preview">
-      <div className="section-header">
-        <h3>Upcoming Content</h3>
-        <a href="/calendar" className="view-all">View Calendar →</a>
-      </div>
-      <div className="calendar-list">
-        {items.map(item => (
-          <div key={item.id} className="calendar-item">
-            <div className="calendar-date">
-              {new Date(item.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}
-            </div>
-            <div className="calendar-content">
-              <span className="calendar-type">{typeIcons[item.type]}</span>
-              <span className="calendar-title">{item.title}</span>
-              {item.hasAffiliate && <span className="affiliate-badge">$</span>}
-            </div>
-            <span className={`calendar-status ${statusColors[item.status]}`}>{item.status}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
-// Top Performing Content
-const TopContent = ({ items }) => (
-  <div className="top-content">
-    <div className="section-header">
-      <h3>Top Performing (This Month)</h3>
-      <a href="/hub" className="view-all">See All →</a>
-    </div>
-    <div className="content-list">
-      {items.map((item, index) => (
-        <div key={item.id} className="content-item">
-          <span className="content-rank">#{index + 1}</span>
-          <div className="content-info">
-            <span className="content-title">{item.title}</span>
-            <div className="content-metrics">
-              <span>{formatNumber(item.views)} views</span>
-              <span>{item.engagement}% engagement</span>
-              {item.earnings > 0 && <span className="content-earnings">{formatCurrency(item.earnings)}</span>}
-            </div>
-          </div>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-// Affiliate Links Performance
-const AffiliatePerformance = ({ links }) => (
-  <div className="affiliate-performance">
-    <div className="section-header">
-      <h3>Affiliate Link Performance</h3>
-      <a href="/links" className="view-all">Manage Links →</a>
-    </div>
-    <div className="affiliate-table">
-      <div className="table-header">
-        <span>Product</span>
-        <span>Clicks</span>
-        <span>Conv.</span>
-        <span>Earned</span>
-      </div>
-      {links.map(link => (
-        <div key={link.id} className="table-row">
-          <span className="product-name">{link.product}</span>
-          <span>{formatNumber(link.clicks)}</span>
-          <span>{link.conversions}</span>
-          <span className="link-earnings">{formatCurrency(link.earnings)}</span>
-        </div>
-      ))}
-    </div>
-  </div>
-);
-
-// Quick Actions
-const QuickActions = () => (
-  <div className="quick-actions">
-    <h3>Quick Actions</h3>
-    <div className="action-buttons">
-      <button className="action-btn primary">+ New Content Idea</button>
-      <button className="action-btn">+ Add Affiliate Link</button>
-      <button className="action-btn">Log Earnings</button>
-      <button className="action-btn">Export Report</button>
-    </div>
-  </div>
-);
-
-// Main Dashboard Component
-const Dashboard = () => {
-  const { earnings, contentCalendar, topContent, affiliateLinks, stats } = mockData;
-  const totalEarnings = earnings.facebook.thisMonth + earnings.amazon.thisMonth;
-  const lastMonthTotal = earnings.facebook.lastMonth + earnings.amazon.lastMonth;
+  const completedCount = todos.filter(t => t.done).length;
 
   return (
-    <div className="dashboard-overview">
-      <div className="dashboard-header">
-        <div>
-          <h1>Hey, Jerri 💜</h1>
-          <p className="dashboard-subtitle">Here's how your content is performing</p>
-        </div>
-        <div className="header-date">
-          {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })}
-        </div>
+    <div className="dashboard-today">
+      <div className="today-header">
+        <h1>Today</h1>
+        <p>{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
       </div>
 
-      {/* Stats Row */}
-      <div className="stats-row">
-        <StatCard 
-          label="Followers" 
-          value={formatNumber(stats.followers)} 
-          subtext={`+${formatNumber(stats.followersGrowth)} this month`}
-          trend="positive"
-          icon="👥"
-        />
-        <StatCard 
-          label="Avg Views" 
-          value={formatNumber(stats.avgViews)} 
-          subtext="per reel"
-          icon="👁️"
-        />
-        <StatCard 
-          label="Engagement" 
-          value={`${stats.engagementRate}%`} 
-          subtext="above average!"
-          trend="positive"
-          icon="💬"
-        />
-        <StatCard 
-          label="Posts This Week" 
-          value={`${stats.postsThisWeek}/${stats.postsGoal}`} 
-          subtext={stats.postsThisWeek >= stats.postsGoal ? "Goal hit! 🎉" : `${stats.postsGoal - stats.postsThisWeek} more to go`}
-          trend={stats.postsThisWeek >= stats.postsGoal ? "positive" : "neutral"}
-          icon="📅"
-        />
-      </div>
-
-      {/* Earnings Section */}
-      <div className="earnings-section">
-        <h2>💰 Earnings This Month</h2>
-        <div className="earnings-grid">
-          <EarningsCard 
-            title="Total Earnings"
-            amount={totalEarnings}
-            comparison={getPercentChange(totalEarnings, lastMonthTotal)}
-            breakdown={[
-              { label: 'Facebook Reels', value: formatCurrency(earnings.facebook.thisMonth) },
-              { label: 'Amazon Affiliates', value: formatCurrency(earnings.amazon.thisMonth) },
-            ]}
-          />
-          <EarningsCard 
-            title="Facebook Bonus"
-            amount={earnings.facebook.thisMonth}
-            comparison={getPercentChange(earnings.facebook.thisMonth, earnings.facebook.lastMonth)}
-            breakdown={[
-              { label: 'Pending payout', value: formatCurrency(earnings.facebook.pending) },
-            ]}
-          />
-          <EarningsCard 
-            title="Amazon Commissions"
-            amount={earnings.amazon.thisMonth}
-            comparison={getPercentChange(earnings.amazon.thisMonth, earnings.amazon.lastMonth)}
-            breakdown={[
-              { label: 'Clicks', value: formatNumber(earnings.amazon.clicks) },
-              { label: 'Conversions', value: earnings.amazon.conversions },
-            ]}
+      <div className="today-grid">
+        {/* Today's Focus */}
+        <div className="today-card focus-card">
+          <h2>🎯 Today's Focus</h2>
+          <input
+            type="text"
+            className="focus-input"
+            value={focus}
+            onChange={(e) => setFocus(e.target.value)}
+            placeholder="What's the ONE thing you need to do today?"
           />
         </div>
-      </div>
 
-      {/* Main Content Grid */}
-      <div className="dashboard-grid">
-        <div className="grid-left">
-          <CalendarPreview items={contentCalendar} />
-          <QuickActions />
+        {/* Quick Stats */}
+        <div className="today-card stats-card">
+          <div className="card-header">
+            <h2>📊 Quick Stats</h2>
+            <button 
+              className="edit-btn-small"
+              onClick={() => setEditingStats(!editingStats)}
+            >
+              {editingStats ? '✓ Done' : '✏️ Edit'}
+            </button>
+          </div>
+          
+          {editingStats ? (
+            <div className="stats-edit">
+              <div className="stat-input-group">
+                <label>Followers</label>
+                <input
+                  type="text"
+                  value={stats.followers}
+                  onChange={(e) => setStats({ ...stats, followers: e.target.value })}
+                  placeholder="e.g., 125K"
+                />
+              </div>
+              <div className="stat-input-group">
+                <label>This Month</label>
+                <input
+                  type="text"
+                  value={stats.monthlyEarnings}
+                  onChange={(e) => setStats({ ...stats, monthlyEarnings: e.target.value })}
+                  placeholder="e.g., $847"
+                />
+              </div>
+              <div className="stat-input-group">
+                <label>Pending</label>
+                <input
+                  type="text"
+                  value={stats.pendingPayout}
+                  onChange={(e) => setStats({ ...stats, pendingPayout: e.target.value })}
+                  placeholder="e.g., $234"
+                />
+              </div>
+            </div>
+          ) : (
+            <div className="stats-display">
+              <div className="stat-item">
+                <span className="stat-value">{stats.followers || '—'}</span>
+                <span className="stat-label">Followers</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-value">{stats.monthlyEarnings || '—'}</span>
+                <span className="stat-label">This Month</span>
+              </div>
+              <div className="stat-item">
+                <span className="stat-value">{stats.pendingPayout || '—'}</span>
+                <span className="stat-label">Pending</span>
+              </div>
+            </div>
+          )}
         </div>
-        <div className="grid-right">
-          <TopContent items={topContent} />
-          <AffiliatePerformance links={affiliateLinks} />
+
+        {/* To-Do List */}
+        <div className="today-card todo-card">
+          <div className="card-header">
+            <h2>✅ To-Do</h2>
+            {completedCount > 0 && (
+              <button className="clear-btn" onClick={clearCompleted}>
+                Clear done ({completedCount})
+              </button>
+            )}
+          </div>
+
+          <form onSubmit={addTodo} className="todo-form">
+            <input
+              type="text"
+              value={newTodo}
+              onChange={(e) => setNewTodo(e.target.value)}
+              placeholder="Add a task..."
+              className="todo-input"
+            />
+            <button type="submit" className="add-btn">+</button>
+          </form>
+
+          <ul className="todo-list">
+            {todos.length === 0 ? (
+              <li className="todo-empty">No tasks yet. Add one above!</li>
+            ) : (
+              todos.map(todo => (
+                <li key={todo.id} className={`todo-item ${todo.done ? 'done' : ''}`}>
+                  <button 
+                    className="todo-check"
+                    onClick={() => toggleTodo(todo.id)}
+                  >
+                    {todo.done ? '✓' : '○'}
+                  </button>
+                  <span className="todo-text">{todo.text}</span>
+                  <button 
+                    className="todo-delete"
+                    onClick={() => deleteTodo(todo.id)}
+                  >
+                    ×
+                  </button>
+                </li>
+              ))
+            )}
+          </ul>
+        </div>
+
+        {/* Up Next */}
+        <div className="today-card upcoming-card">
+          <h2>📅 Up Next</h2>
+          {upcoming.length === 0 ? (
+            <p className="empty-message">Nothing scheduled. Check the Calendar to plan content!</p>
+          ) : (
+            <ul className="upcoming-list">
+              {upcoming.map(item => (
+                <li key={item.id} className="upcoming-item">
+                  <span className="upcoming-icon">{typeIcons[item.type] || '📷'}</span>
+                  <div className="upcoming-info">
+                    <span className="upcoming-title">{item.title}</span>
+                    <span className="upcoming-date">{formatDate(item.date)}</span>
+                  </div>
+                  {item.hasAffiliate && <span className="affiliate-badge">💰</span>}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        {/* Quick Notes */}
+        <div className="today-card notes-card">
+          <h2>📝 Quick Notes</h2>
+          <textarea
+            className="notes-textarea"
+            value={notes}
+            onChange={(e) => setNotes(e.target.value)}
+            placeholder="Jot down ideas, reminders, anything..."
+          />
         </div>
       </div>
     </div>
