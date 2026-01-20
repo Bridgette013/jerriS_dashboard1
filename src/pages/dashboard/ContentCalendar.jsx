@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useCloudSync, useSyncedState } from '../../hooks/useCloudSync';
 import './ContentCalendar.css';
 
-// Mock data - wire up to real data source later
-const initialContent = [
+// Default data for new users
+const defaultContent = [
   { id: 1, date: '2026-01-19', type: 'reel', status: 'scheduled', title: 'Morning routine hack', description: 'Show the 3-item morning basket system', hasAffiliate: true, affiliateProduct: 'Bathroom organizer bins', platform: 'facebook' },
   { id: 2, date: '2026-01-20', type: 'reel', status: 'idea', title: 'Kids lunch prep', description: 'Batch prep lunches for the week', hasAffiliate: true, affiliateProduct: 'Lunch containers set', platform: 'facebook' },
   { id: 3, date: '2026-01-21', type: 'reel', status: 'idea', title: 'Amazon haul - kitchen', description: 'Unbox and review kitchen organization finds', hasAffiliate: true, affiliateProduct: 'Multiple products', platform: 'facebook' },
@@ -12,7 +13,7 @@ const initialContent = [
   { id: 7, date: '2026-01-25', type: 'live', status: 'scheduled', title: 'Q&A with followers', description: 'Monthly live answering questions', hasAffiliate: false, platform: 'facebook' },
 ];
 
-const ideasBacklog = [
+const defaultIdeas = [
   { id: 101, title: 'Car organization tips', description: 'How I keep the van clean with kids', hasAffiliate: true },
   { id: 102, title: 'Budget grocery haul', description: 'Feeding the family for $150/week', hasAffiliate: false },
   { id: 103, title: 'School morning chaos', description: 'Real unfiltered morning getting kids out', hasAffiliate: false },
@@ -21,8 +22,12 @@ const ideasBacklog = [
 ];
 
 const ContentCalendar = () => {
-  const [content, setContent] = useState(initialContent);
-  const [ideas, setIdeas] = useState(ideasBacklog);
+  // Cloud sync
+  const cloudSync = useCloudSync();
+
+  // Synced calendar data
+  const [content, setContent] = useSyncedState('calendar', defaultContent, cloudSync);
+  const [ideas, setIdeas] = useSyncedState('ideas', defaultIdeas, cloudSync);
   const [selectedItem, setSelectedItem] = useState(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const [currentWeekStart, setCurrentWeekStart] = useState(new Date('2026-01-19'));

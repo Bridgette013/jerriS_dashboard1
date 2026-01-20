@@ -34,6 +34,57 @@ const Hub = () => {
   const [editingItem, setEditingItem] = useState(null);
   const [visiblePasswords, setVisiblePasswords] = useState({});
   const [copiedField, setCopiedField] = useState(null);
+  const [importMessage, setImportMessage] = useState(null);
+
+  // Export Hub data to JSON file
+  const exportToJson = () => {
+    const dataStr = JSON.stringify(categories, null, 2);
+    const blob = new Blob([dataStr], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `hub-backup-${new Date().toISOString().split('T')[0]}.json`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
+  // Import Hub data from JSON file
+  const importFromJson = (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      try {
+        const importedData = JSON.parse(e.target.result);
+
+        // Validate the structure
+        if (!Array.isArray(importedData)) {
+          throw new Error('Invalid format');
+        }
+
+        // Check if it has the expected category structure
+        const isValid = importedData.every(cat =>
+          cat.id && cat.title && Array.isArray(cat.items)
+        );
+
+        if (!isValid) {
+          throw new Error('Invalid format');
+        }
+
+        setCategories(importedData);
+        setImportMessage({ type: 'success', text: 'Data imported successfully!' });
+        setTimeout(() => setImportMessage(null), 3000);
+      } catch (error) {
+        setImportMessage({ type: 'error', text: 'Invalid file format. Please use a valid Hub backup file.' });
+        setTimeout(() => setImportMessage(null), 5000);
+      }
+    };
+    reader.readAsText(file);
+    event.target.value = ''; // Reset input
+  };
 
   useEffect(() => {
     localStorage.setItem('jerri_hub', JSON.stringify(categories));
@@ -102,10 +153,43 @@ const Hub = () => {
           <h1>Hub</h1>
           <p>All your logins and quick links in one place</p>
         </div>
-        <button className="btn-primary" onClick={() => setShowAddModal(true)}>
-          + Add Login
-        </button>
+        <div className="hub-header-actions">
+          <button className="btn-primary" onClick={() => setShowAddModal(true)}>
+            + Add Login
+          </button>
+        </div>
       </div>
+
+      {/* Security Disclaimer */}
+      <div className="hub-disclaimer">
+        <div className="disclaimer-content">
+          <span className="disclaimer-icon">🔒</span>
+          <div>
+            <strong>This data is stored locally on this device only.</strong>
+            <p>We do not store your passwords. Export your data regularly to avoid losing it.</p>
+          </div>
+        </div>
+        <div className="disclaimer-actions">
+          <button className="btn-secondary export-btn" onClick={exportToJson}>
+            📤 Export to JSON
+          </button>
+          <label className="btn-secondary import-btn">
+            📥 Import from JSON
+            <input
+              type="file"
+              accept=".json"
+              onChange={importFromJson}
+              style={{ display: 'none' }}
+            />
+          </label>
+        </div>
+      </div>
+
+      {importMessage && (
+        <div className={`import-message ${importMessage.type}`}>
+          {importMessage.text}
+        </div>
+      )}
 
       {totalItems === 0 ? (
         <div className="empty-state-box">
@@ -201,7 +285,7 @@ const Hub = () => {
       )}
 
       <div className="hub-footer">
-        <p>🔒 Stored locally in your browser only — no one else can see this.</p>
+        <p>💡 Tip: Use the export feature regularly to back up your data.</p>
       </div>
 
       {showAddModal && (

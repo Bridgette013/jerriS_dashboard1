@@ -1,77 +1,68 @@
 import React, { useState, useEffect } from 'react';
+import { useCloudSync, useSyncedState } from '../../hooks/useCloudSync';
 import './Dashboard.css';
 
 const Dashboard = () => {
-  // Today's Focus
-  const [focus, setFocus] = useState(() => {
-    return localStorage.getItem('jerri_focus') || '';
-  });
+  // Cloud sync
+  const cloudSync = useCloudSync();
+  const { syncStatus, lastSynced } = cloudSync;
 
-  // To-Do List
-  const [todos, setTodos] = useState(() => {
-    const saved = localStorage.getItem('jerri_todos');
-    return saved ? JSON.parse(saved) : [];
-  });
+  // Today's Focus (synced)
+  const [focus, setFocus, focusLoading] = useSyncedState('focus', '', cloudSync);
+
+  // To-Do List (synced)
+  const [todos, setTodos, todosLoading] = useSyncedState('todos', [], cloudSync);
   const [newTodo, setNewTodo] = useState('');
 
-  // Quick Notes
-  const [notes, setNotes] = useState(() => {
-    return localStorage.getItem('jerri_notes') || '';
-  });
+  // Quick Notes (synced)
+  const [notes, setNotes, notesLoading] = useSyncedState('notes', '', cloudSync);
 
-  // Quick Stats
-  const [stats, setStats] = useState(() => {
-    const saved = localStorage.getItem('jerri_stats');
-    return saved ? JSON.parse(saved) : {
-      followers: '',
-      monthlyEarnings: '',
-      pendingPayout: ''
-    };
-  });
+  // Quick Stats (synced)
+  const [stats, setStats, statsLoading] = useSyncedState('stats', {
+    followers: '',
+    monthlyEarnings: '',
+    pendingPayout: ''
+  }, cloudSync);
   const [editingStats, setEditingStats] = useState(false);
 
-  // Calendar data (read-only, from ContentCalendar)
+  // Calendar data (synced - read from cloud)
   const [upcoming, setUpcoming] = useState([]);
 
-  // Save effects
+  // Load upcoming content from calendar (from cloud data)
   useEffect(() => {
-    localStorage.setItem('jerri_focus', focus);
-  }, [focus]);
-
-  useEffect(() => {
-    localStorage.setItem('jerri_todos', JSON.stringify(todos));
-  }, [todos]);
-
-  useEffect(() => {
-    localStorage.setItem('jerri_notes', notes);
-  }, [notes]);
-
-  useEffect(() => {
-    localStorage.setItem('jerri_stats', JSON.stringify(stats));
-  }, [stats]);
-
-  // Load upcoming content from calendar
-  useEffect(() => {
-    const calendarData = localStorage.getItem('jerri_calendar');
-    if (calendarData) {
-      const items = JSON.parse(calendarData);
-      const today = new Date();
-      today.setHours(0, 0, 0, 0);
-      
-      const nextWeek = new Date(today);
-      nextWeek.setDate(nextWeek.getDate() + 7);
-
-      const upcomingItems = items
-        .filter(item => {
-          const itemDate = new Date(item.date);
-          return itemDate >= today && itemDate <= nextWeek;
-        })
-        .sort((a, b) => new Date(a.date) - new Date(b.date))
-        .slice(0, 5);
-
-      setUpcoming(upcomingItems);
+    const calendarData = cloudSync.cloudData?.calendar || [];
+    // Also check localStorage as fallback
+    if (calendarData.length === 0) {
+      const localData = localStorage.getItem('jerri_calendar');
+      if (localData) {
+        try {
+          const items = JSON.parse(localData);
+          processUpcoming(items);
+          return;
+        } catch (e) {}
+      }
     }
-  }, []);
+    processUpcoming(calendarData);
+  }, [cloudSync.cloudData]);
+
+  const processUpcoming = (items) => {
+    if (!Array.isArray(items)) return;
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const nextWeek = new Date(today);
+    nextWeek.setDate(nextWeek.getDate() + 7);
+
+    const upcomingItems = items
+      .filter(item => {
+        const itemDate = new Date(item.date);
+        return itemDate >= today && itemDate <= nextWeek;
+      })
+      .sort((a, b) => new Date(a.date) - new Date(b.date))
+      .slice(0, 5);
+
+    setUpcoming(upcomingItems);
+  };
 
   // To-Do functions
   const addTodo = (e) => {
@@ -116,11 +107,24 @@ const Dashboard = () => {
 
   const completedCount = todos.filter(t => t.done).length;
 
+  const isLoading = focusLoading || todosLoading || notesLoading || statsLoading;
+
   return (
     <div className="dashboard-today">
       <div className="today-header">
-        <h1>Today</h1>
-        <p>{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
+        <div>
+          <h1>Today</h1>
+          <p>{new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}</p>
+        </div>
+        <div className="sync-indicator">
+          {syncStatus === 'syncing' && <span className="sync-status syncing">Syncing...</span>}
+          {syncStatus === 'success' && lastSynced && (
+            <span className="sync-status success">
+              Synced {lastSynced.toLocaleTimeString()}
+            </span>
+          )}
+          {syncStatus === 'error' && <span className="sync-status error">Sync error</span>}
+        </div>
       </div>
 
       <div className="today-grid">
