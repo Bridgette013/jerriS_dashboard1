@@ -22,22 +22,19 @@ const About = () => {
           border: '1px solid #2A2A2A'
         }}>
           <p style={{ color: '#E0E0E0', marginBottom: '1rem', lineHeight: '1.8' }}>
-            I'm Jerri S.—a single mom of four from Phoenix, Arizona.
+            Hi, I'm [Your Name]—add your introduction here.
           </p>
           <p style={{ color: '#E0E0E0', marginBottom: '1rem', lineHeight: '1.8' }}>
-            My kids are Deegan (16), Emmarose (11), Lillyana (7), and Jasper (3). Plus two cats, Bonnie and Clyde, who run this house more than I do.
+            Tell your audience about yourself. What makes you unique? What's your story?
           </p>
           <p style={{ color: '#E0E0E0', marginBottom: '1rem', lineHeight: '1.8' }}>
-            I started sharing my life online because I was tired of the highlight reels. The perfect kitchens. The calm mornings. The moms who "have it all together." That's not real—and it made me feel like I was failing.
+            Share why you started creating content. What inspired you to share your journey with others?
           </p>
           <p style={{ color: '#E0E0E0', marginBottom: '1rem', lineHeight: '1.8' }}>
-            So I showed the mess. The mental health days. The days I cry in the car before pickup. The clutter I'll probably never conquer. And something wild happened—people said "me too."
-          </p>
-          <p style={{ color: '#E0E0E0', marginBottom: '1rem', lineHeight: '1.8' }}>
-            That's what this is about. Not advice from someone who figured it out. Just real life from someone still in it.
+            Add more paragraphs as needed. Be authentic and connect with your audience.
           </p>
           <p style={{ color: '#E0E0E0', lineHeight: '1.8' }}>
-            You're not broken. You're not behind. You're not alone.
+            End with something memorable that represents your brand.
           </p>
         </div>
       </div>

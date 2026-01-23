@@ -13,6 +13,10 @@ import Dashboard from './pages/dashboard/Dashboard';
 import ContentCalendar from './pages/dashboard/ContentCalendar';
 import LinkTracker from './pages/dashboard/LinkTracker';
 import Hub from './pages/dashboard/Hub';
+import Customize from './pages/dashboard/Customize';
+
+// Public standalone pages
+import Links from './pages/Links';
 
 // Auth
 import { useAuth } from './context/AuthContext';
@@ -43,8 +47,8 @@ const PublicLayout = ({ children }) => {
     <div className="site">
       <header className="site-header">
         <div className="brand">
-          <span className="brand-title">Jerri S.</span>
-          <span className="brand-subtitle">The chaos. The clutter. The real.</span>
+          <span className="brand-title">Your Name</span>
+          <span className="brand-subtitle">Your tagline goes here</span>
         </div>
         <nav className="site-nav">
           <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
@@ -60,17 +64,17 @@ const PublicLayout = ({ children }) => {
             Collabs
           </NavLink>
         </nav>
-        <a className="header-cta" href="https://facebook.com/jerri.winters" target="_blank" rel="noopener noreferrer">
+        <a className="header-cta" href="#" target="_blank" rel="noopener noreferrer">
           Follow Along
         </a>
       </header>
       <main>{children}</main>
       <footer className="site-footer">
         <div>
-          <p className="footer-title">Jerri S.</p>
-          <p className="footer-subtitle">Single mom of 4. No filter. No shame.</p>
+          <p className="footer-title">Your Name</p>
+          <p className="footer-subtitle">Your footer tagline here</p>
         </div>
-        <p className="footer-meta">© {new Date().getFullYear()} Jerri S. All rights reserved.</p>
+        <p className="footer-meta">© {new Date().getFullYear()} Your Name. All rights reserved.</p>
       </footer>
     </div>
   );
@@ -87,7 +91,7 @@ const DashboardLayout = ({ children }) => {
     <div className="dashboard-layout bg-brand-carbon text-brand-white">
       <aside className="dashboard-sidebar">
         <div className="sidebar-brand">
-          <span className="sidebar-title">Jerri S.</span>
+          <span className="sidebar-title">Your Name</span>
           <span className="sidebar-subtitle">Creator Dashboard</span>
         </div>
         <nav className="sidebar-nav">
@@ -102,6 +106,9 @@ const DashboardLayout = ({ children }) => {
           </NavLink>
           <NavLink to="/dashboard/hub" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
             🔐 Hub
+          </NavLink>
+          <NavLink to="/dashboard/customize" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+            ✨ Customize
           </NavLink>
         </nav>
         <div className="sidebar-footer">
@@ -158,6 +165,9 @@ const App = () => {
       {/* Login route */}
       <Route path="/login" element={<Login />} />
 
+      {/* Public link-in-bio page (standalone, no layout) */}
+      <Route path="/links" element={<Links />} />
+
       {/* Dashboard routes (protected) */}
       <Route
         path="/dashboard"
@@ -195,6 +205,16 @@ const App = () => {
           <ProtectedRoute>
             <DashboardLayout>
               <Hub />
+            </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/customize"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <Customize />
             </DashboardLayout>
           </ProtectedRoute>
         }

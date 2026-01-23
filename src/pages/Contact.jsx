@@ -50,7 +50,7 @@ const Contact = () => {
               Get in touch:
             </h3>
             <a
-              href="mailto:collab@jerrisworld.com"
+              href="mailto:hello@yourdomain.com"
               style={{
                 display: 'inline-block',
                 background: 'linear-gradient(135deg, #5F00B8 0%, #7B2FD4 100%)',
@@ -62,7 +62,7 @@ const Contact = () => {
                 marginTop: '0.5rem'
               }}
             >
-              collab@jerrisworld.com
+              hello@yourdomain.com
             </a>
           </div>
         </div>

@@ -26,7 +26,7 @@ const Login = () => {
     <div className="login-page">
       <div className="login-container">
         <div className="login-brand">
-          <span className="login-title">Jerri S.</span>
+          <span className="login-title">Your Name</span>
           <span className="login-subtitle">Creator Dashboard</span>
         </div>
 
