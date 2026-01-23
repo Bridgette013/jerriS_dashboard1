@@ -13,6 +13,10 @@ import Dashboard from './pages/dashboard/Dashboard';
 import ContentCalendar from './pages/dashboard/ContentCalendar';
 import LinkTracker from './pages/dashboard/LinkTracker';
 import Hub from './pages/dashboard/Hub';
+import Customize from './pages/dashboard/Customize';
+
+// Public standalone pages
+import Links from './pages/Links';
 
 // Auth
 import { useAuth } from './context/AuthContext';
@@ -103,6 +107,9 @@ const DashboardLayout = ({ children }) => {
           <NavLink to="/dashboard/hub" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
             🔐 Hub
           </NavLink>
+          <NavLink to="/dashboard/customize" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
+            ✨ Customize
+          </NavLink>
         </nav>
         <div className="sidebar-footer">
           <NavLink to="/" className="sidebar-link back-link">
@@ -155,6 +162,9 @@ const App = () => {
         }
       />
 
+      {/* Public links page (no header/footer) */}
+      <Route path="/links" element={<Links />} />
+
       {/* Login route */}
       <Route path="/login" element={<Login />} />
 
@@ -195,6 +205,16 @@ const App = () => {
           <ProtectedRoute>
             <DashboardLayout>
               <Hub />
+            </DashboardLayout>
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/dashboard/customize"
+        element={
+          <ProtectedRoute>
+            <DashboardLayout>
+              <Customize />
             </DashboardLayout>
           </ProtectedRoute>
         }
