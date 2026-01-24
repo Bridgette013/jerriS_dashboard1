@@ -2,26 +2,10 @@ import React, { useState, useEffect } from 'react';
 import './Hub.css';
 
 const defaultCategories = [
-  {
-    id: 'money',
-    title: '💰 Money Stuff',
-    items: []
-  },
-  {
-    id: 'social',
-    title: '📱 Social Accounts',
-    items: []
-  },
-  {
-    id: 'website',
-    title: '🔧 Website & Email',
-    items: []
-  },
-  {
-    id: 'other',
-    title: '📁 Other',
-    items: []
-  }
+  { id: 'money', name: '💰 Money Stuff', items: [] },
+  { id: 'social', name: '📱 Social Accounts', items: [] },
+  { id: 'website', name: '🌐 Website & Email', items: [] },
+  { id: 'other', name: '📁 Other', items: [] }
 ];
 
 const Hub = () => {
@@ -32,70 +16,11 @@ const Hub = () => {
 
   const [showAddModal, setShowAddModal] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
-  const [visiblePasswords, setVisiblePasswords] = useState({});
   const [copiedField, setCopiedField] = useState(null);
-  const [importMessage, setImportMessage] = useState(null);
-
-  // Export Hub data to JSON file
-  const exportToJson = () => {
-    const dataStr = JSON.stringify(categories, null, 2);
-    const blob = new Blob([dataStr], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `hub-backup-${new Date().toISOString().split('T')[0]}.json`;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
-  };
-
-  // Import Hub data from JSON file
-  const importFromJson = (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      try {
-        const importedData = JSON.parse(e.target.result);
-
-        // Validate the structure
-        if (!Array.isArray(importedData)) {
-          throw new Error('Invalid format');
-        }
-
-        // Check if it has the expected category structure
-        const isValid = importedData.every(cat =>
-          cat.id && cat.title && Array.isArray(cat.items)
-        );
-
-        if (!isValid) {
-          throw new Error('Invalid format');
-        }
-
-        setCategories(importedData);
-        setImportMessage({ type: 'success', text: 'Data imported successfully!' });
-        setTimeout(() => setImportMessage(null), 3000);
-      } catch (error) {
-        setImportMessage({ type: 'error', text: 'Invalid file format. Please use a valid Hub backup file.' });
-        setTimeout(() => setImportMessage(null), 5000);
-      }
-    };
-    reader.readAsText(file);
-    event.target.value = ''; // Reset input
-  };
 
   useEffect(() => {
     localStorage.setItem('jerri_hub', JSON.stringify(categories));
   }, [categories]);
-
-  const togglePassword = (itemId) => {
-    setVisiblePasswords(prev => ({
-      ...prev,
-      [itemId]: !prev[itemId]
-    }));
-  };
 
   const copyToClipboard = (text, fieldId) => {
     navigator.clipboard.writeText(text);
@@ -151,129 +76,77 @@ const Hub = () => {
       <div className="page-header">
         <div>
           <h1>Hub</h1>
-          <p>All your logins and quick links in one place</p>
+          <p>Quick links to all your accounts — your browser's password manager handles the rest</p>
         </div>
-        <div className="hub-header-actions">
-          <button className="btn-primary" onClick={() => setShowAddModal(true)}>
-            + Add Login
-          </button>
-        </div>
+        <button className="btn-primary" onClick={() => setShowAddModal(true)}>
+          + Add Account
+        </button>
       </div>
-
-      {/* Security Disclaimer */}
-      <div className="hub-disclaimer">
-        <div className="disclaimer-content">
-          <span className="disclaimer-icon">🔒</span>
-          <div>
-            <strong>This data is stored locally on this device only.</strong>
-            <p>We do not store your passwords. Export your data regularly to avoid losing it.</p>
-          </div>
-        </div>
-        <div className="disclaimer-actions">
-          <button className="btn-secondary export-btn" onClick={exportToJson}>
-            📤 Export to JSON
-          </button>
-          <label className="btn-secondary import-btn">
-            📥 Import from JSON
-            <input
-              type="file"
-              accept=".json"
-              onChange={importFromJson}
-              style={{ display: 'none' }}
-            />
-          </label>
-        </div>
-      </div>
-
-      {importMessage && (
-        <div className={`import-message ${importMessage.type}`}>
-          {importMessage.text}
-        </div>
-      )}
 
       {totalItems === 0 ? (
-        <div className="empty-state-box">
-          <h3>🔐 No logins saved yet</h3>
-          <p>Add your important accounts so you always know where to go and how to get in.</p>
+        <div className="empty-state">
+          <span className="empty-icon">🔗</span>
+          <h3>No accounts saved yet</h3>
+          <p>Add your first account to get quick access to all your platforms</p>
           <button className="btn-primary" onClick={() => setShowAddModal(true)}>
-            + Add Your First Login
+            + Add Your First Account
           </button>
         </div>
       ) : (
-        <div className="hub-grid">
+        <div className="hub-categories">
           {categories.map(category => (
             category.items.length > 0 && (
               <div key={category.id} className="hub-category">
-                <h2>{category.title}</h2>
+                <h2 className="category-title">{category.name}</h2>
                 <div className="hub-items">
                   {category.items.map(item => (
-                    <div key={item.id} className="hub-item">
-                      <div className="item-row">
-                        <div className="item-info">
-                          <span className="item-name">{item.name}</span>
-                          {item.description && (
-                            <span className="item-desc">{item.description}</span>
-                          )}
+                    <div key={item.id} className="hub-card">
+                      <div className="hub-card-header">
+                        <div className="hub-card-title">
+                          <h3>{item.name}</h3>
+                          {item.description && <p>{item.description}</p>}
                         </div>
-                        <div className="item-actions">
-                          {item.url && (
-                            <a
-                              href={item.url.startsWith('http') ? item.url : `https://${item.url}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="go-btn"
-                            >
-                              Go →
-                            </a>
-                          )}
-                          <button
-                            className="edit-btn"
-                            onClick={() => setEditingItem({ ...item, categoryId: category.id })}
-                          >
-                            ✏️
-                          </button>
-                        </div>
+                        <button 
+                          className="btn-edit"
+                          onClick={() => setEditingItem({ ...item, categoryId: category.id })}
+                        >
+                          ✏️
+                        </button>
+                      </div>
+                      
+                      <div className="hub-card-body">
+                        {item.username && (
+                          <div className="hub-field">
+                            <span className="field-label">Username/Email</span>
+                            <div className="field-value-row">
+                              <span className="field-value">{item.username}</span>
+                              <button 
+                                className={`btn-copy ${copiedField === `user-${item.id}` ? 'copied' : ''}`}
+                                onClick={() => copyToClipboard(item.username, `user-${item.id}`)}
+                              >
+                                {copiedField === `user-${item.id}` ? '✓' : '📋'}
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                        
+                        {item.notes && (
+                          <div className="hub-field">
+                            <span className="field-label">Notes</span>
+                            <span className="field-value notes">{item.notes}</span>
+                          </div>
+                        )}
                       </div>
 
-                      {(item.login || item.password) && (
-                        <div className="credentials">
-                          {item.login && (
-                            <div className="cred-row">
-                              <span className="cred-label">Login:</span>
-                              <span className="cred-value">{item.login}</span>
-                              <button
-                                className={`copy-btn ${copiedField === `${item.id}-login` ? 'copied' : ''}`}
-                                onClick={() => copyToClipboard(item.login, `${item.id}-login`)}
-                              >
-                                {copiedField === `${item.id}-login` ? '✓' : '📋'}
-                              </button>
-                            </div>
-                          )}
-                          {item.password && (
-                            <div className="cred-row">
-                              <span className="cred-label">Password:</span>
-                              <span className="cred-value">
-                                {visiblePasswords[item.id] ? item.password : '••••••••'}
-                              </span>
-                              <button
-                                className="show-btn"
-                                onClick={() => togglePassword(item.id)}
-                              >
-                                {visiblePasswords[item.id] ? '🙈' : '👁️'}
-                              </button>
-                              <button
-                                className={`copy-btn ${copiedField === `${item.id}-pass` ? 'copied' : ''}`}
-                                onClick={() => copyToClipboard(item.password, `${item.id}-pass`)}
-                              >
-                                {copiedField === `${item.id}-pass` ? '✓' : '📋'}
-                              </button>
-                            </div>
-                          )}
-                        </div>
-                      )}
-
-                      {item.notes && (
-                        <div className="item-notes">📝 {item.notes}</div>
+                      {item.url && (
+                        <a 
+                          href={item.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="btn-launch"
+                        >
+                          Launch →
+                        </a>
                       )}
                     </div>
                   ))}
@@ -284,144 +157,128 @@ const Hub = () => {
         </div>
       )}
 
-      <div className="hub-footer">
-        <p>💡 Tip: Use the export feature regularly to back up your data.</p>
-      </div>
-
       {showAddModal && (
-        <AddModal
+        <AddModal 
           categories={categories}
-          onSave={(categoryId, item) => {
-            addItem(categoryId, item);
-            setShowAddModal(false);
-          }}
           onClose={() => setShowAddModal(false)}
+          onAdd={addItem}
         />
       )}
 
       {editingItem && (
-        <EditModal
+        <EditModal 
           item={editingItem}
-          categories={categories}
+          onClose={() => setEditingItem(null)}
           onSave={(updates) => {
             updateItem(editingItem.categoryId, editingItem.id, updates);
             setEditingItem(null);
           }}
           onDelete={() => deleteItem(editingItem.categoryId, editingItem.id)}
-          onClose={() => setEditingItem(null)}
         />
       )}
     </div>
   );
 };
 
-const AddModal = ({ categories, onSave, onClose }) => {
+const AddModal = ({ categories, onClose, onAdd }) => {
   const [form, setForm] = useState({
+    categoryId: 'money',
     name: '',
     description: '',
     url: '',
-    login: '',
-    password: '',
-    notes: '',
-    categoryId: 'money'
+    username: '',
+    notes: ''
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!form.name.trim()) return;
+    
     const { categoryId, ...itemData } = form;
-    onSave(categoryId, itemData);
+    onAdd(categoryId, itemData);
+    onClose();
   };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
+      <div className="modal" onClick={e => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>Add Login</h2>
-          <button className="modal-close" onClick={onClose}>×</button>
+          <h2>Add Account</h2>
+          <button className="btn-close" onClick={onClose}>×</button>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="modal-body">
             <div className="form-group">
-              <label>Name *</label>
-              <input
-                type="text"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                placeholder="e.g., Amazon Associates"
-                required
-                autoFocus
-              />
-            </div>
-
-            <div className="form-group">
               <label>Category</label>
-              <select
+              <select 
                 value={form.categoryId}
-                onChange={(e) => setForm({ ...form, categoryId: e.target.value })}
+                onChange={(e) => setForm({...form, categoryId: e.target.value})}
               >
                 {categories.map(cat => (
-                  <option key={cat.id} value={cat.id}>{cat.title}</option>
+                  <option key={cat.id} value={cat.id}>{cat.name}</option>
                 ))}
               </select>
             </div>
 
             <div className="form-group">
-              <label>What's it for?</label>
-              <input
+              <label>Account Name *</label>
+              <input 
+                type="text"
+                value={form.name}
+                onChange={(e) => setForm({...form, name: e.target.value})}
+                placeholder="e.g., Amazon Associates"
+                required
+              />
+            </div>
+
+            <div className="form-group">
+              <label>Description</label>
+              <input 
                 type="text"
                 value={form.description}
-                onChange={(e) => setForm({ ...form, description: e.target.value })}
-                placeholder="e.g., Check earnings, get links"
+                onChange={(e) => setForm({...form, description: e.target.value})}
+                placeholder="e.g., Affiliate earnings"
               />
             </div>
 
             <div className="form-group">
-              <label>Website URL</label>
-              <input
-                type="text"
+              <label>Login URL</label>
+              <input 
+                type="url"
                 value={form.url}
-                onChange={(e) => setForm({ ...form, url: e.target.value })}
-                placeholder="e.g., affiliate-program.amazon.com"
-              />
-            </div>
-
-            <div className="form-divider"><span>Login Info</span></div>
-
-            <div className="form-group">
-              <label>Email or Username</label>
-              <input
-                type="text"
-                value={form.login}
-                onChange={(e) => setForm({ ...form, login: e.target.value })}
-                placeholder="e.g., jerri@email.com"
+                onChange={(e) => setForm({...form, url: e.target.value})}
+                placeholder="https://affiliate-program.amazon.com"
               />
             </div>
 
             <div className="form-group">
-              <label>Password</label>
-              <input
+              <label>Username / Email</label>
+              <input 
                 type="text"
-                value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
-                placeholder="Your password"
+                value={form.username}
+                onChange={(e) => setForm({...form, username: e.target.value})}
+                placeholder="For your reference only"
               />
-              <span className="form-hint">Stored locally in your browser only</span>
             </div>
 
             <div className="form-group">
               <label>Notes</label>
-              <textarea
+              <textarea 
                 value={form.notes}
-                onChange={(e) => setForm({ ...form, notes: e.target.value })}
-                placeholder="Any helpful notes..."
+                onChange={(e) => setForm({...form, notes: e.target.value})}
                 rows={2}
+                placeholder="Any extra info..."
               />
+            </div>
+
+            <div className="security-note">
+              <span>🔒</span>
+              <p>Passwords are handled by your browser's password manager — we don't store them here for your security.</p>
             </div>
           </div>
           <div className="modal-footer">
             <button type="button" className="btn-secondary" onClick={onClose}>Cancel</button>
-            <button type="submit" className="btn-primary">Add Login</button>
+            <button type="submit" className="btn-primary">Add Account</button>
           </div>
         </form>
       </div>
@@ -429,91 +286,78 @@ const AddModal = ({ categories, onSave, onClose }) => {
   );
 };
 
-const EditModal = ({ item, categories, onSave, onDelete, onClose }) => {
+const EditModal = ({ item, onClose, onSave, onDelete }) => {
   const [form, setForm] = useState({
     name: item.name || '',
     description: item.description || '',
     url: item.url || '',
-    login: item.login || '',
-    password: item.password || '',
+    username: item.username || '',
     notes: item.notes || ''
   });
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name.trim()) return;
     onSave(form);
   };
 
   return (
     <div className="modal-overlay" onClick={onClose}>
-      <div className="modal-content" onClick={e => e.stopPropagation()}>
+      <div className="modal" onClick={e => e.stopPropagation()}>
         <div className="modal-header">
-          <h2>Edit Login</h2>
-          <button className="modal-close" onClick={onClose}>×</button>
+          <h2>Edit Account</h2>
+          <button className="btn-close" onClick={onClose}>×</button>
         </div>
         <form onSubmit={handleSubmit}>
           <div className="modal-body">
             <div className="form-group">
-              <label>Name *</label>
-              <input
+              <label>Account Name *</label>
+              <input 
                 type="text"
                 value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                onChange={(e) => setForm({...form, name: e.target.value})}
                 required
               />
             </div>
 
             <div className="form-group">
-              <label>What's it for?</label>
-              <input
+              <label>Description</label>
+              <input 
                 type="text"
                 value={form.description}
-                onChange={(e) => setForm({ ...form, description: e.target.value })}
+                onChange={(e) => setForm({...form, description: e.target.value})}
               />
             </div>
 
             <div className="form-group">
-              <label>Website URL</label>
-              <input
-                type="text"
+              <label>Login URL</label>
+              <input 
+                type="url"
                 value={form.url}
-                onChange={(e) => setForm({ ...form, url: e.target.value })}
-              />
-            </div>
-
-            <div className="form-divider"><span>Login Info</span></div>
-
-            <div className="form-group">
-              <label>Email or Username</label>
-              <input
-                type="text"
-                value={form.login}
-                onChange={(e) => setForm({ ...form, login: e.target.value })}
+                onChange={(e) => setForm({...form, url: e.target.value})}
               />
             </div>
 
             <div className="form-group">
-              <label>Password</label>
-              <input
+              <label>Username / Email</label>
+              <input 
                 type="text"
-                value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
+                value={form.username}
+                onChange={(e) => setForm({...form, username: e.target.value})}
               />
             </div>
 
             <div className="form-group">
               <label>Notes</label>
-              <textarea
+              <textarea 
                 value={form.notes}
-                onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                onChange={(e) => setForm({...form, notes: e.target.value})}
                 rows={2}
               />
             </div>
           </div>
           <div className="modal-footer">
             <button type="button" className="btn-danger" onClick={onDelete}>Delete</button>
-            <button type="submit" className="btn-primary">Save</button>
+            <button type="submit" className="btn-primary">Save Changes</button>
           </div>
         </form>
       </div>

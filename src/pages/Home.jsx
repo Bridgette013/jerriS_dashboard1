@@ -217,6 +217,21 @@ function Home() {
         </div>
         <div className="cta-decoration"></div>
       </section>
+
+    {/* Hidden trap door */}
+<div 
+  onClick={() => window.location.href = '/dashboard'}
+  style={{
+    position: 'fixed',
+    bottom: '10px',
+    right: '10px',
+    width: '20px',
+    height: '20px',
+    backgroundColor: 'black',
+    cursor: 'default',
+    opacity: 0.1
+  }}
+></div>
     </div>
   );
 }
