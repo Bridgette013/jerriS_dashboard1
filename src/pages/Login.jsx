@@ -10,11 +10,11 @@ const Login = () => {
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    setIsLoading(true);
-
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setError('');
+  setIsLoading(true);
+  
   const result = await login(password);
 
   if (result.success) {

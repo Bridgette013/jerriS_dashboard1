@@ -232,6 +232,28 @@ function Home() {
     opacity: 0.1
   }}
 ></div>
+
+{/* CTA Section */}
+      <section className="cta-section">
+        <div className="cta-content">
+          <h2>Ready to join the chaos?</h2>
+          <p>Follow along for the realest content on the internet.</p>
+          <a href="https://facebook.com/jerri.winters" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-large">
+            Follow Along 💜
+          </a>
+        </div>
+        <div className="cta-decoration"></div>
+      </section>
+
+      {/* Secret door */}
+      <Link to="/login" style={{ 
+        position: 'fixed',
+        bottom: '10px',
+        right: '10px',
+        width: '20px',
+        height: '20px',
+        opacity: 0
+      }}>.</Link>
     </div>
   );
 }
