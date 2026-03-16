@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import './Home.css';
+import EmailCapture from '../components/EmailCapture';
 
 function Home() {
   return (
@@ -10,7 +11,7 @@ function Home() {
         <div className="hero-bg-shape shape-1"></div>
         <div className="hero-bg-shape shape-2"></div>
         <div className="hero-grid-lines"></div>
-        
+
         <div className="hero-container">
           {/* Left side - Text content */}
           <div className="hero-content">
@@ -22,11 +23,11 @@ function Home() {
             </h1>
             <p className="hero-tagline">The chaos. The clutter. The real.</p>
             <p className="hero-bio">
-              I share the stuff most people won't—the breakdowns, 
+              I share the stuff most people won't—the breakdowns,
               the breakthroughs, and everything in between.
               <em> Just imagine...</em> someone finally gets it.
             </p>
-            
+
             <div className="hero-buttons">
               <a href="https://facebook.com/jerri.winters" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                 Follow Me
@@ -57,13 +58,13 @@ function Home() {
           <div className="hero-image-wrapper">
             <div className="image-blob"></div>
             <div className="image-frame">
-              <img 
-                src="/images/jerri-headshot.png" 
-                alt="Jerri S." 
+              <img
+                src="/images/jerri-headshot.png"
+                alt="Jerri S."
                 className="hero-photo"
               />
             </div>
-            
+
             {/* Floating elements around photo */}
             <div className="floating-icon floating-1">
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -72,13 +73,13 @@ function Home() {
               <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
             </div>
             <div className="floating-stat floating-3">
-              <span className="stat-num">4M+</span>
-              <span className="stat-txt">views</span>
+              <span className="stat-num">7.9M+</span>
+              <span className="stat-txt">VIRAL VIEWS</span>
             </div>
             <div className="floating-badge floating-4">
               <span>💜</span>
             </div>
-            
+
             {/* Decorative elements */}
             <div className="deco-dots"></div>
             <div className="deco-wave">
@@ -90,6 +91,70 @@ function Home() {
         </div>
       </section>
 
+      {/* Viral Video Section */}
+      <section className="viral-section" style={{
+        padding: '4rem 2rem',
+        background: 'linear-gradient(135deg, #1a0033 0%, #0a0a0a 100%)',
+      }}>
+        <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
+          <div style={{
+            display: 'inline-block',
+            background: 'linear-gradient(135deg, #C485FF 0%, #60E1E0 100%)',
+            padding: '0.5rem 1.5rem',
+            borderRadius: '20px',
+            marginBottom: '1rem',
+            fontSize: '0.875rem',
+            fontWeight: '700',
+            letterSpacing: '0.05em',
+            animation: 'pulse 2s ease-in-out infinite',
+          }}>
+            🔥 7.9M VIEWS & CLIMBING
+          </div>
+          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#fff' }}>
+            The Video That Broke the Internet
+          </h2>
+          <p style={{ color: '#888', marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem' }}>
+            When your kid gets stuck in a baby swing and firefighters have to rescue her. Real life. Real funny. Really viral.
+          </p>
+          <div style={{
+            maxWidth: '600px',
+            margin: '0 auto',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            boxShadow: '0 20px 60px rgba(196, 133, 255, 0.3)',
+          }}>
+            <iframe
+              width="100%"
+              height="400"
+              src="https://www.youtube.com/embed/WddXxULi0sc"
+              title="Viral Swing Video - 7.9M Views"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ display: 'block' }}
+            />
+          </div>
+          <div style={{
+            marginTop: '2rem',
+            display: 'flex',
+            gap: '2rem',
+            justifyContent: 'center',
+            flexWrap: 'wrap',
+            color: '#C485FF',
+            fontSize: '0.875rem',
+            fontWeight: '600',
+          }}>
+            <span>👀 7.9M+ Views</span>
+            <span>❤️ 95K+ Likes</span>
+            <span>💬 1.5K+ Comments</span>
+            <span>📈 Still Growing</span>
+          </div>
+        </div>
+      </section>
+
+      {/* Email Signup */}
+      <EmailCapture />
+
       {/* Stats Wave Section */}
       <section className="stats-section">
         <div className="wave-divider">
@@ -99,20 +164,20 @@ function Home() {
         </div>
         <div className="stats-container">
           <div className="stat-item">
-            <span className="stat-number">4M+</span>
-            <span className="stat-label">Views</span>
+            <span className="stat-number">8,050,000+</span>
+            <span className="stat-label">Viral Views (and climbing 🔥)</span>
           </div>
           <div className="stat-item">
-            <span className="stat-number">16K+</span>
-            <span className="stat-label">Followers</span>
+            <span className="stat-number">15K+</span>
+            <span className="stat-label">Subscribers</span>
+          </div>
+          <div className="stat-item">
+            <span className="stat-number">9M+</span>
+            <span className="stat-label">Total Views</span>
           </div>
           <div className="stat-item">
             <span className="stat-number">4</span>
             <span className="stat-label">Tiny Humans</span>
-          </div>
-          <div className="stat-item">
-            <span className="stat-number">2</span>
-            <span className="stat-label">Chaos Cats</span>
           </div>
         </div>
       </section>
@@ -123,7 +188,7 @@ function Home() {
           <p className="section-eyebrow">The Real Stars</p>
           <h2 className="section-title">Meet the Crew</h2>
         </div>
-        
+
         <div className="crew-grid">
           <div className="crew-card large">
             <div className="crew-card-inner">
@@ -165,8 +230,8 @@ function Home() {
         <div className="quote-container">
           <div className="quote-mark">"</div>
           <blockquote className="quote-text">
-            I show the mess because I know you have one too. The dishes piled up. 
-            The tears in the car after drop-off. The days where you didn't brush 
+            I show the mess because I know you have one too. The dishes piled up.
+            The tears in the car after drop-off. The days where you didn't brush
             your teeth until 4pm.
           </blockquote>
           <p className="quote-emphasis">
@@ -218,35 +283,8 @@ function Home() {
         <div className="cta-decoration"></div>
       </section>
 
-    {/* Hidden trap door */}
-<div 
-  onClick={() => window.location.href = '/dashboard'}
-  style={{
-    position: 'fixed',
-    bottom: '10px',
-    right: '10px',
-    width: '20px',
-    height: '20px',
-    backgroundColor: 'black',
-    cursor: 'default',
-    opacity: 0.1
-  }}
-></div>
-
-{/* CTA Section */}
-      <section className="cta-section">
-        <div className="cta-content">
-          <h2>Ready to join the chaos?</h2>
-          <p>Follow along for the realest content on the internet.</p>
-          <a href="https://facebook.com/jerri.winters" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-large">
-            Follow Along 💜
-          </a>
-        </div>
-        <div className="cta-decoration"></div>
-      </section>
-
       {/* Secret door */}
-      <Link to="/login" style={{ 
+      <Link to="/login" style={{
         position: 'fixed',
         bottom: '10px',
         right: '10px',

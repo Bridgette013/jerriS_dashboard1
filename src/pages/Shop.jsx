@@ -2,27 +2,37 @@ import React from 'react';
 
 const shopCategories = [
   {
-    name: 'Kitchen Favorites',
+    name: '🍼 Baby & Breastfeeding (Used with All 4 Kids)',
     items: [
-      { title: 'Organizer Bins (Set of 6)', link: '#', price: '$24.99' },
-      { title: 'Lunch Containers', link: '#', price: '$18.99' },
-      { title: 'Reusable Storage Bags', link: '#', price: '$12.99' },
+      { title: 'My Brest Friend Nursing Pillow', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$39.99', note: 'Saved my back with all 4 babies' },
+      { title: 'Medela Breast Pump', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$299.99', note: '2+ years breastfeeding each kid - this was essential' },
+      { title: 'Lansinoh Nipple Cream', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$9.99', note: 'Absolute lifesaver. Buy 3.' },
+      { title: 'Nursing Cover (Privacy Anywhere)', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$18.99', note: 'Breastfed everywhere with this' },
     ]
   },
   {
-    name: 'Home Organization',
+    name: '💪 Post-Surgery Recovery (My Tummy Tuck Journey)',
     items: [
-      { title: 'Bathroom Caddy', link: '#', price: '$19.99' },
-      { title: 'Cable Management Kit', link: '#', price: '$14.99' },
-      { title: 'Closet Organizers', link: '#', price: '$29.99' },
+      { title: 'Medical Grade Compression Garment', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$49.99', note: 'Non-negotiable for recovery' },
+      { title: 'Bio-Oil Scar Treatment', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$15.99', note: 'Actually works - been using 6 months' },
+      { title: 'Recovery Wedge Pillow', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$34.99', note: 'Sleep positioning post-surgery' },
+      { title: 'Scar Tape Strips', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$12.99', note: 'Helps flatten scars' },
     ]
   },
   {
-    name: 'Mom Life Essentials',
+    name: '🚗 Chaos Management (4 Kids + 2 Cats Survival Kit)',
     items: [
-      { title: 'Car Organizer', link: '#', price: '$22.99' },
-      { title: 'Planner & Stickers', link: '#', price: '$16.99' },
-      { title: 'Self Care Kit', link: '#', price: '$34.99' },
+      { title: 'Car Backseat Organizer', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$22.99', note: "Keeps snacks off the floor...mostly" },
+      { title: 'Bentgo Kids Lunch Boxes (4-Pack)', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$79.99', note: '4 kids = industrial lunch prep' },
+      { title: 'First Aid Kit (Car Emergency)', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$24.99', note: 'After that swing incident...yeah.' },
+      { title: 'Reusable Water Bottles (6-Pack)', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$32.99', note: 'Because they lose everything' },
+    ]
+  },
+  {
+    name: '🏡 Mom Survival Essentials',
+    items: [
+      { title: 'Dry Shampoo (Industrial Size)', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$14.99', note: "4pm and still haven't showered? Same." },
+      { title: 'Coffee Maker (Programmer)', link: 'https://amzn.to/PLACEHOLDER-GET-AMAZON-ID', price: '$79.99', note: 'Survival juice on a timer' },
     ]
   },
 ];
@@ -66,9 +76,11 @@ const Shop = () => {
                 gap: '1rem'
               }}>
                 {category.items.map((item) => (
-                  <a 
+                  <a
                     key={item.title}
                     href={item.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     style={{
                       display: 'block',
                       background: '#0A0A0A',
@@ -76,14 +88,20 @@ const Shop = () => {
                       borderRadius: '8px',
                       textDecoration: 'none',
                       border: '1px solid #2A2A2A',
-                      transition: 'border-color 0.2s'
+                      transition: 'all 0.2s',
+                      cursor: 'pointer',
                     }}
+                    onMouseEnter={(e) => e.currentTarget.style.borderColor = '#C485FF'}
+                    onMouseLeave={(e) => e.currentTarget.style.borderColor = '#2A2A2A'}
                   >
                     <span style={{ display: 'block', color: '#fff', fontWeight: '600', marginBottom: '0.25rem' }}>
                       {item.title}
                     </span>
-                    <span style={{ color: '#60E1E0', fontWeight: '700' }}>
+                    <span style={{ color: '#60E1E0', fontWeight: '700', display: 'block', marginBottom: '0.5rem' }}>
                       {item.price}
+                    </span>
+                    <span style={{ color: '#888', fontSize: '0.875rem', lineHeight: '1.4' }}>
+                      {item.note}
                     </span>
                   </a>
                 ))}
