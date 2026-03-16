@@ -1,4 +1,4 @@
-exports.handler = async (event, context) => {
+export default async (request) => {
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -6,28 +6,26 @@ exports.handler = async (event, context) => {
     "Access-Control-Allow-Methods": "POST, OPTIONS"
   };
 
-  if (event.httpMethod === "OPTIONS") {
-    return { statusCode: 200, headers, body: "" };
+  if (request.method === "OPTIONS") {
+    return new Response("", { status: 200, headers });
   }
 
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      headers,
-      body: JSON.stringify({ error: "Method not allowed" })
-    };
+  if (request.method !== "POST") {
+    return new Response(JSON.stringify({ error: "Method not allowed" }), {
+      status: 405,
+      headers
+    });
   }
 
   try {
-    const body = JSON.parse(event.body);
+    const body = await request.json();
     const { email } = body;
 
     if (!email || !email.includes("@")) {
-      return {
-        statusCode: 400,
-        headers,
-        body: JSON.stringify({ error: "Valid email required" })
-      };
+      return new Response(JSON.stringify({ error: "Valid email required" }), {
+        status: 400,
+        headers
+      });
     }
 
     const GOOGLE_SHEET_URL = process.env.GOOGLE_SHEET_WEBHOOK_URL;
@@ -42,18 +40,16 @@ exports.handler = async (event, context) => {
       })
     });
 
-    return {
-      statusCode: 200,
-      headers,
-      body: JSON.stringify({ success: true })
-    };
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers
+    });
 
   } catch (error) {
     console.error("Subscribe function error:", error);
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ error: "Internal server error" })
-    };
+    return new Response(JSON.stringify({ error: "Internal server error" }), {
+      status: 500,
+      headers
+    });
   }
 };
