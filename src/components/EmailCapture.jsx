@@ -50,7 +50,7 @@ const EmailCapture = () => {
         fontSize: '0.75rem',
         fontWeight: '700',
       }}>
-        7.9M SAW THE VIDEO
+        8.5M SAW THE VIDEO
       </div>
       <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: '#fff' }}>
         Don't Miss What's Next

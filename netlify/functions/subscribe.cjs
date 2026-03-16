@@ -1,5 +1,3 @@
-const { getStore } = require("@netlify/blobs");
-
 exports.handler = async (event, context) => {
   const headers = {
     "Content-Type": "application/json",
@@ -32,12 +30,16 @@ exports.handler = async (event, context) => {
       };
     }
 
-    const store = getStore("subscribers");
-    const key = email.toLowerCase().replace(/[^a-z0-9@._-]/g, "");
+    const GOOGLE_SHEET_URL = process.env.GOOGLE_SHEET_WEBHOOK_URL;
 
-    await store.setJSON(key, {
-      email,
-      subscribedAt: new Date().toISOString()
+    await fetch(GOOGLE_SHEET_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email,
+        timestamp: new Date().toISOString(),
+        source: "website-viral-8.5M"
+      })
     });
 
     return {

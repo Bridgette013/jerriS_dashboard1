@@ -153,7 +153,9 @@ function Home() {
       </section>
 
       {/* Email Signup */}
-      <EmailCapture />
+      <section style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
+        <EmailCapture />
+      </section>
 
       {/* Stats Wave Section */}
       <section className="stats-section">

@@ -1,4 +1,5 @@
 import React from 'react';
+import EmailCapture from '../components/EmailCapture';
 
 const About = () => {
   return (
@@ -41,6 +42,9 @@ const About = () => {
           </p>
         </div>
       </div>
+      <section style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
+        <EmailCapture />
+      </section>
     </div>
   );
 };
