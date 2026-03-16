@@ -1,46 +1,16 @@
 import React from 'react';
-import { Routes, Route, NavLink, Navigate } from 'react-router-dom';
+import { Routes, Route, NavLink, Link } from 'react-router-dom';
 
 // Public pages
 import Home from './pages/Home';
 import Shop from './pages/Shop';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Login from './pages/Login';
-
-// Dashboard pages
-import Dashboard from './pages/dashboard/Dashboard';
-import ContentCalendar from './pages/dashboard/ContentCalendar';
-import LinkTracker from './pages/dashboard/LinkTracker';
-import Hub from './pages/dashboard/Hub';
-import Customize from './pages/dashboard/Customize';
 
 // Public standalone pages
 import Links from './pages/Links';
 
-// Auth
-import { useAuth } from './context/AuthContext';
-
 import './App.css';
-
-// Protected Route wrapper
-const ProtectedRoute = ({ children }) => {
-  const { isAuthenticated, isLoading } = useAuth();
-
-  if (isLoading) {
-    return (
-      <div className="loading-screen">
-        <div className="loading-spinner"></div>
-      </div>
-    );
-  }
-
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
-
-  return children;
-};
 
 const PublicLayout = ({ children }) => {
   return (
@@ -74,61 +44,57 @@ const PublicLayout = ({ children }) => {
           <p className="footer-title">Jerri S.</p>
           <p className="footer-subtitle">Single mom of 4. No filter. No shame.</p>
         </div>
-        <p className="footer-meta">© {new Date().getFullYear()} Jerri S. All rights reserved.</p>
+        <p className="footer-meta">&copy; {new Date().getFullYear()} Jerri S. All rights reserved.</p>
       </footer>
     </div>
   );
 };
 
-const DashboardLayout = ({ children }) => {
-  const { logout } = useAuth();
+/* ============================================
+   404 PAGE
+   ============================================ */
+const NotFound = () => (
+  <div style={{
+    textAlign: 'center',
+    padding: '6rem 2rem',
+    maxWidth: '500px',
+    margin: '0 auto'
+  }}>
+    <h1 style={{
+      fontFamily: 'Montserrat, sans-serif',
+      fontSize: '4rem',
+      background: 'linear-gradient(135deg, #C485FF, #60E1E0)',
+      WebkitBackgroundClip: 'text',
+      WebkitTextFillColor: 'transparent',
+      marginBottom: '0.5rem'
+    }}>404</h1>
+    <p style={{
+      fontSize: '1.1rem',
+      color: '#888',
+      marginBottom: '2rem'
+    }}>
+      This page doesn't exist. Probably got lost in the chaos.
+    </p>
+    <Link to="/" style={{
+      display: 'inline-block',
+      background: 'linear-gradient(135deg, #5F00B8, #7B2FD4)',
+      color: 'white',
+      padding: '0.75rem 1.5rem',
+      borderRadius: '8px',
+      textDecoration: 'none',
+      fontWeight: '600'
+    }}>
+      Back to Home
+    </Link>
+  </div>
+);
 
-  const handleLogout = () => {
-    logout();
-  };
-
-  return (
-    <div className="dashboard-layout bg-brand-carbon text-brand-white">
-      <aside className="dashboard-sidebar">
-        <div className="sidebar-brand">
-          <span className="sidebar-title">Jerri S.</span>
-          <span className="sidebar-subtitle">Creator Dashboard</span>
-        </div>
-        <nav className="sidebar-nav">
-          <NavLink to="/dashboard" end className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
-            📊 Overview
-          </NavLink>
-          <NavLink to="/dashboard/calendar" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
-            📅 Content Calendar
-          </NavLink>
-          <NavLink to="/dashboard/links" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
-            🔗 Link Tracker
-          </NavLink>
-          <NavLink to="/dashboard/hub" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
-            🔐 Hub
-          </NavLink>
-          <NavLink to="/dashboard/customize" className={({ isActive }) => `sidebar-link ${isActive ? 'active' : ''}`}>
-            ✨ Customize
-          </NavLink>
-        </nav>
-        <div className="sidebar-footer">
-          <NavLink to="/" className="sidebar-link back-link">
-            ← Back to Site
-          </NavLink>
-          <button onClick={handleLogout} className="sidebar-link logout-btn">
-            🚪 Logout
-          </button>
-        </div>
-      </aside>
-      <main className="dashboard-main">{children}</main>
-    </div>
-  );
-};
-
+/* ============================================
+   ROUTES — PUBLIC ONLY
+   ============================================ */
 const App = () => {
   return (
     <Routes>
-      {/* Public routes */}
       <Route
         path="/"
         element={
@@ -162,70 +128,15 @@ const App = () => {
         }
       />
 
-      {/* Public links page (no header/footer) */}
+      {/* Public links page (no header/footer — used as link-in-bio) */}
       <Route path="/links" element={<Links />} />
 
-      {/* Login route */}
-      <Route path="/login" element={<Login />} />
-
-      {/* Dashboard routes (protected) */}
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <DashboardLayout>
-              <Dashboard />
-            </DashboardLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/dashboard/calendar"
-        element={
-          <ProtectedRoute>
-            <DashboardLayout>
-              <ContentCalendar />
-            </DashboardLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/dashboard/links"
-        element={
-          <ProtectedRoute>
-            <DashboardLayout>
-              <LinkTracker />
-            </DashboardLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/dashboard/hub"
-        element={
-          <ProtectedRoute>
-            <DashboardLayout>
-              <Hub />
-            </DashboardLayout>
-          </ProtectedRoute>
-        }
-      />
-      <Route
-        path="/dashboard/customize"
-        element={
-          <ProtectedRoute>
-            <DashboardLayout>
-              <Customize />
-            </DashboardLayout>
-          </ProtectedRoute>
-        }
-      />
-
-      {/* Fallback */}
+      {/* 404 catch-all */}
       <Route
         path="*"
         element={
           <PublicLayout>
-            <Home />
+            <NotFound />
           </PublicLayout>
         }
       />

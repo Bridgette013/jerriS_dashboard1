@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /dashboard
+Disallow: /dashboard/
+Disallow: /login
+
+Sitemap: https://jerrisworld.com/sitemap.xml

@@ -1,1 +1,7 @@
+# Old dashboard/login URLs → redirect to homepage
+/login          /   302
+/dashboard      /   302
+/dashboard/*    /   302
+
+# SPA fallback — must be last
 /*    /index.html   200

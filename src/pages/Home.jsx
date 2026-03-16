@@ -285,15 +285,6 @@ function Home() {
         <div className="cta-decoration"></div>
       </section>
 
-      {/* Secret door */}
-      <Link to="/login" style={{
-        position: 'fixed',
-        bottom: '10px',
-        right: '10px',
-        width: '20px',
-        height: '20px',
-        opacity: 0
-      }}>.</Link>
     </div>
   );
 }
