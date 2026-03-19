@@ -108,7 +108,7 @@ function Home() {
             letterSpacing: '0.05em',
             animation: 'pulse 2s ease-in-out infinite',
           }}>
-            🔥 7.9M VIEWS & CLIMBING
+            🔥 11M+ VIEWS & CLIMBING
           </div>
           <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#fff' }}>
             The Video That Broke the Internet
@@ -127,7 +127,7 @@ function Home() {
               width="100%"
               height="400"
               src="https://www.youtube.com/embed/WddXxULi0sc"
-              title="Viral Swing Video - 7.9M Views"
+              title="Viral Swing Video - 11M+ Views"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
@@ -144,7 +144,7 @@ function Home() {
             fontSize: '0.875rem',
             fontWeight: '600',
           }}>
-            <span>👀 7.9M+ Views</span>
+            <span>👀 11M+ Views</span>
             <span>❤️ 95K+ Likes</span>
             <span>💬 1.5K+ Comments</span>
             <span>📈 Still Growing</span>

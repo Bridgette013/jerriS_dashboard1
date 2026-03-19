@@ -50,18 +50,18 @@ const EmailCapture = () => {
         fontSize: '0.75rem',
         fontWeight: '700',
       }}>
-        8.5M SAW THE VIDEO
+        11M+ SAW THE VIDEO
       </div>
       <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: '#fff' }}>
-        Don't Miss What's Next
+        Grab the Free Survival Checklist
       </h3>
       <p style={{ color: 'rgba(255,255,255,0.8)', marginBottom: '1.5rem' }}>
-        Join 15K+ people who get the real mom content (no filters, no BS)
+        Get "The Single Mom Survival Checklist: 25 Things Nobody Tells You" — free, straight to your inbox.
       </p>
 
       {status === 'success' ? (
         <p style={{ color: '#60E1E0', fontWeight: '600', fontSize: '1.1rem' }}>
-          ✓ You're in! Check your email.
+          ✓ Check your inbox — your checklist is on the way!
         </p>
       ) : (
         <form onSubmit={handleSubmit} style={{
@@ -103,7 +103,7 @@ const EmailCapture = () => {
               fontSize: '1rem',
             }}
           >
-            {status === 'submitting' ? 'Joining...' : 'Join Free'}
+            {status === 'submitting' ? 'Sending...' : 'Send My Checklist'}
           </button>
         </form>
       )}

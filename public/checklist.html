@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Single Mom Survival Kit | Jerri's World</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Plus+Jakarta+Sans:wght@300;400;800&family=Permanent+Marker&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --jerri-red: #ff3b3b;
+            --night: #000000;
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--night);
+            color: #ffffff;
+            scroll-behavior: smooth;
+        }
+        .marker { font-family: 'Permanent Marker', cursive; }
+        .serif-glam { font-family: 'Playfair Display', serif; }
+        .sticker-border {
+            border: 3px solid white;
+            box-shadow: 5px 5px 0px rgba(255, 255, 255, 0.1);
+        }
+        .survival-card {
+            background: #111;
+            border: 2px solid #333;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            height: 100%;
+        }
+        .survival-card:hover {
+            border-color: var(--jerri-red);
+            transform: scale(1.02);
+            box-shadow: 8px 8px 0px var(--jerri-red);
+        }
+        .checkbox-custom {
+            width: 30px; height: 30px; border: 3px solid white; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .checkbox-custom.checked { background: var(--jerri-red); }
+        .checkbox-custom.checked::after { content: '✓'; color: white; font-size: 20px; font-weight: 900; }
+        .progress-bar-fixed {
+            position: fixed; bottom: 0; left: 0; width: 100%; background: rgba(0,0,0,0.95);
+            padding: 15px 20px; z-index: 100; border-top: 4px solid var(--jerri-red);
+            backdrop-filter: blur(10px);
+        }
+        .halftone-bg {
+            background-image: radial-gradient(#222 15%, transparent 16%);
+            background-size: 15px 15px;
+        }
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white !important; color: black !important; }
+            .survival-card { border: 2px solid black !important; color: black !important; background: white !important; break-inside: avoid; }
+            .survival-card p { color: #333 !important; }
+            .halftone-bg { background-image: none !important; }
+        }
+    </style>
+</head>
+<body class="pb-32 halftone-bg">
+
+    <header class="relative min-h-screen flex flex-col items-center justify-center text-center px-6 bg-black overflow-hidden">
+        <div class="absolute inset-0 z-0 opacity-20">
+             <div class="w-full h-full bg-center bg-no-repeat bg-contain" style="background-image: url('/image_9e8d92.png');"></div>
+        </div>
+
+        <div class="relative z-10 max-w-4xl">
+            <img src="/JerrisWorld_Logo_White.png" alt="Jerri's World Logo" class="w-full max-w-2xl mx-auto mb-8 drop-shadow-[0_0_30px_rgba(255,255,255,0.1)]">
+
+            <div class="bg-white text-black marker text-xl md:text-3xl py-2 px-8 inline-block -rotate-2 sticker-border mb-10">
+                25 Things Nobody Tells You
+            </div>
+
+            <p class="text-lg md:text-2xl font-bold tracking-tight mb-12 text-gray-300 px-4">
+                The Survival Toolkit for the mom doing it alone. No filters. No fluff.
+            </p>
+
+            <a href="#kit" class="bg-white text-black font-black py-4 px-12 sticker-border hover:bg-red-600 hover:text-white transition-all uppercase tracking-tighter text-xl no-print">
+                Open the Kit
+            </a>
+        </div>
+    </header>
+
+    <main id="kit" class="max-w-7xl mx-auto px-6 py-20">
+
+        <div class="mb-24 p-1 bg-white sticker-border sticky top-4 z-40 no-print">
+            <div class="bg-black p-6 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div>
+                    <h2 class="serif-glam text-2xl italic font-black text-white">Sanity Status</h2>
+                    <p id="progress-text" class="text-gray-400 marker text-sm">Drop the bottle, keep the cool.</p>
+                </div>
+                <div class="flex-1 w-full">
+                    <div class="w-full bg-gray-900 h-6 sticker-border overflow-hidden">
+                        <div id="survival-progress-bar" class="bg-red-600 h-full w-0 transition-all duration-700"></div>
+                    </div>
+                </div>
+                <div class="text-4xl font-black text-white italic"><span id="progress-count">0</span><span class="text-lg opacity-50">/25</span></div>
+            </div>
+        </div>
+
+        <section class="mb-24">
+            <h3 class="serif-glam text-5xl italic font-black mb-12 uppercase border-b-8 border-red-600 inline-block pb-2">Vol 1. The Mental Game</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">01. Car-Cry Sanctuary</h4>
+                            <p class="text-gray-300 text-sm">The driveway is your decompression chamber. Let it happen. Then go inside and be the mom they need. Keep tissues and water in the console.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">02. No Comparison</h4>
+                            <p class="text-gray-300 text-sm">Stop comparing your Day 1 to an influencer's Day 1000. They have help you don't see. Your only competition is yesterday.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">03. Ask for help</h4>
+                            <p class="text-gray-300 text-sm">You are not weak for needing help. Text the friend. Call the family. People want to help—let them in before you're drowning.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">04. Therapy = Maintenance</h4>
+                            <p class="text-gray-300 text-sm">You change the oil in your car so the engine doesn't blow. Therapy is the same concept. BetterHelp and Open Path Collective offer affordable options.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">05. Present > Perfect</h4>
+                            <p class="text-gray-300 text-sm">Burnt dinner or screen time doesn't make you a bad mom. Showing up every day does. That is more than enough.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mt-8 bg-white text-black p-8 sticker-border -rotate-1">
+                <h5 class="marker text-2xl mb-4 uppercase">My 2:00 AM Crisis Roster</h5>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <input type="text" data-input="roster1" placeholder="THE RIDE OR DIE" class="border-b-4 border-black p-2 outline-none focus:border-red-600 font-bold uppercase text-xs">
+                    <input type="text" data-input="roster2" placeholder="THE LOGISTICS QUEEN" class="border-b-4 border-black p-2 outline-none focus:border-red-600 font-bold uppercase text-xs">
+                    <input type="text" data-input="roster3" placeholder="THE SAFE SPACE" class="border-b-4 border-black p-2 outline-none focus:border-red-600 font-bold uppercase text-xs">
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <h3 class="serif-glam text-5xl italic font-black mb-12 uppercase border-b-8 border-white inline-block pb-2">Vol 2. Money & Survival</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">06. Apply for Everything</h4>
+                            <p class="text-gray-300 text-sm">WIC, SNAP, TANF, Utility Assistance. These programs exist for this moment. Forget the middleman—go straight to the source.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">07. The $25 Starter</h4>
+                            <p class="text-gray-300 text-sm">Open a savings account with $25 and never touch it. Auto-transfer $5-10/week. Emergency funds start small, but they start today.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">08. Track Every Penny</h4>
+                            <p class="text-gray-300 text-sm">One month. Every coffee, every drive-thru. No judgment—just awareness. You can't fix what you can't see.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">09. File for Support</h4>
+                            <p class="text-gray-300 text-sm">Even if he won't pay, the court order creates a legal record. It protects your kids long-term. Let the system handle the fight.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">10. One Marketable Skill</h4>
+                            <p class="text-gray-300 text-sm">Bookkeeping, social media, coding, notary. Learn one skill that pays more than minimum wage. YouTube University is free.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 bg-red-600 text-white p-8 sticker-border rotate-1">
+                <h5 class="marker text-2xl mb-4">Zero-BS Search Strategy</h5>
+                <p class="text-sm mb-4 italic">The system is slow. You have to move faster. Use these exact search terms for your area:</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-black uppercase tracking-widest">
+                    <div class="bg-black p-4 border-2 border-white">
+                        <p class="mb-2 text-red-500">Food & Nutrition</p>
+                        <p>"[Your State] SNAP Application"</p>
+                        <p>"WIC office near me"</p>
+                    </div>
+                    <div class="bg-black p-4 border-2 border-white">
+                        <p class="mb-2 text-red-500">Bills & Rent</p>
+                        <p>"LIHEAP [Your State] application"</p>
+                        <p>"Rent assistance [Your County]"</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <h3 class="serif-glam text-5xl italic font-black mb-12 uppercase border-b-8 border-red-600 inline-block pb-2">Vol 3. The Mini-Team</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">11. They are Watching</h4>
+                            <p class="text-gray-300 text-sm">You don't have to hide the struggle. Let them see you problem-solve, recover, and keep going. That's the real lesson.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">12. Routine = Sanity</h4>
+                            <p class="text-gray-300 text-sm">Backpacks on hooks. Shoes by the door. Small systems prevent morning meltdowns. Start with one today.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">13. Delegation Duty</h4>
+                            <p class="text-gray-300 text-sm">Let them help. Age-appropriate chores aren't unfair; they're family contributions. They are learning life skills.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">14. 10 Minute Dates</h4>
+                            <p class="text-gray-300 text-sm">Undivided attention for 10 minutes beats an expensive outing. Walk to the mailbox. Read an extra book. Just be there.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">15. Drop the Dad-Guilt</h4>
+                            <p class="text-gray-300 text-sm">You can't control another adult. Focus on what happens under your roof. Stability and love are enough.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <h3 class="serif-glam text-5xl italic font-black mb-12 uppercase border-b-8 border-white inline-block pb-2">Vol 4. Base Camp Ops</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">16. Healthy vs Clean</h4>
+                            <p class="text-gray-300 text-sm">If the health department wouldn't shut you down, you're fine. Toys mean kids live here. Lower the bar.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">17. 10-Min Nightly Reset</h4>
+                            <p class="text-gray-300 text-sm">Timer for 10 min. Clear counters. Start dishwasher. Prep coffee. Your morning sanity is built tonight.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">18. Paper Plate Victory</h4>
+                            <p class="text-gray-300 text-sm">If paper plates mean 20 more minutes of sanity, use them. Nobody is inspecting your dishware.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">19. Reality Meal Prep</h4>
+                            <p class="text-gray-300 text-sm">Cook double on Sunday. Leftovers on Tuesday. Frozen nuggets are a win. Fed is fed.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">20. Automate Bills</h4>
+                            <p class="text-gray-300 text-sm">Auto-pay everything. One less thing to remember when you're running on fumes.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-24">
+            <h3 class="serif-glam text-5xl italic font-black mb-12 uppercase border-b-8 border-red-600 inline-block pb-2">Vol 5. The CEO (You)</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">21. Hydrate or Die</h4>
+                            <p class="text-gray-300 text-sm">Actual water. Not Diet Coke. Not coffee. Your body is running a marathon on fumes—fuel it.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">22. 15 Min Movement</h4>
+                            <p class="text-gray-300 text-sm">Not to lose weight—to feel human. Walk, dance, or find a quick YouTube workout. Move the blood.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">23. Protect Your Identity</h4>
+                            <p class="text-gray-300 text-sm">A podcast, a journal, a bath. You existed before them and you'll exist after. Keep a hobby that's yours.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">24. Find Your Tribe</h4>
+                            <p class="text-gray-300 text-sm">Single moms who get it. Search Facebook for local groups. You need a safe space to vent with people who know the struggle.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="survival-card p-8" onclick="toggleTask(this)">
+                    <div class="flex items-start gap-4">
+                        <div class="checkbox-custom"></div>
+                        <div>
+                            <h4 class="text-xl font-extrabold mb-3 italic uppercase">25. You are Doing It</h4>
+                            <p class="text-gray-300 text-sm">You got up. You fed them. You finished this list. That's everything. You are doing better than you think.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="text-center py-20 bg-white text-black sticker-border rotate-[-1deg] mb-20 no-print">
+            <h2 class="serif-glam text-5xl md:text-8xl italic font-black mb-6 uppercase leading-tight">Join the <span class="text-red-600">Tribe</span></h2>
+            <p class="marker text-2xl mb-12">15,000+ Moms who get the chaos.</p>
+            <a href="/" class="bg-red-600 text-white font-black py-6 px-16 text-3xl sticker-border inline-block hover:scale-105 transition-all uppercase tracking-tighter">LET'S GO</a>
+        </div>
+
+    </main>
+
+    <div class="progress-bar-fixed flex items-center justify-between no-print">
+        <div class="flex items-center gap-6">
+            <span class="text-xs font-black uppercase text-red-500 hidden md:block">Sanity Status</span>
+            <span class="text-3xl font-black italic" id="bar-count">0/25</span>
+        </div>
+        <button onclick="window.print()" class="marker text-sm bg-white text-black px-8 py-2 sticker-border hover:bg-red-600 hover:text-white transition-colors">PRINT YOUR KIT</button>
+    </div>
+
+    <script>
+        const totalItems = 25;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.survival-card').forEach((card, index) => {
+                card.dataset.index = index;
+                if (localStorage.getItem('survival_task_' + index) === 'true') {
+                    card.querySelector('.checkbox-custom').classList.add('checked');
+                }
+            });
+
+            document.querySelectorAll('input').forEach(input => {
+                const key = 'survival_input_' + input.dataset.input;
+                const saved = localStorage.getItem(key);
+                if (saved) input.value = saved;
+                input.addEventListener('input', (e) => {
+                    localStorage.setItem(key, e.target.value);
+                });
+            });
+
+            updateProgressUI();
+        });
+
+        function toggleTask(card) {
+            const checkbox = card.querySelector('.checkbox-custom');
+            const newState = checkbox.classList.toggle('checked');
+            localStorage.setItem('survival_task_' + card.dataset.index, newState);
+            updateProgressUI();
+        }
+
+        function updateProgressUI() {
+            const checked = document.querySelectorAll('.checkbox-custom.checked').length;
+            const percent = (checked / totalItems) * 100;
+
+            document.getElementById('survival-progress-bar').style.width = percent + '%';
+            document.getElementById('progress-count').innerText = checked;
+            document.getElementById('bar-count').innerText = checked + '/25';
+
+            const txt = document.getElementById('progress-text');
+            if (checked === 0) txt.innerText = "Drop the bottle, keep the cool.";
+            else if (checked < 10) txt.innerText = "Heels on. Moving forward.";
+            else if (checked < 20) txt.innerText = "System in place. You're the CEO.";
+            else txt.innerText = "Absolute Survival Queen.";
+        }
+    </script>
+</body>
+</html>

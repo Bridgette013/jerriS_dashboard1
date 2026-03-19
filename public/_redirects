@@ -3,5 +3,8 @@
 /dashboard      /   302
 /dashboard/*    /   302
 
+# Checklist page — serve static HTML directly
+/checklist      /checklist.html   200
+
 # SPA fallback — must be last
 /*    /index.html   200
