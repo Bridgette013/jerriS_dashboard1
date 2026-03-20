@@ -39,11 +39,12 @@ exports.handler = async (event, context) => {
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ email, timestamp: new Date().toISOString() })
         });
+        console.log("Zapier webhook sent for:", email);
       } catch (zapErr) {
         console.error("Zapier webhook failed:", zapErr);
       }
     } else {
-      console.warn("GOOGLE_SHEET_WEBHOOK_URL not set — skipping Zapier");
+      console.warn("GOOGLE_SHEET_WEBHOOK_URL not set - skipping Zapier");
     }
 
     return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
