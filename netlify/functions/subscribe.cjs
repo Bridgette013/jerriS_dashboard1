@@ -1,5 +1,3 @@
-const { getStore } = require("@netlify/blobs");
-
 exports.handler = async (event, context) => {
   const headers = {
     "Content-Type": "application/json",
@@ -24,33 +22,22 @@ exports.handler = async (event, context) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: "Valid email required" }) };
     }
 
-    const store = getStore("subscribers");
-    const key = email.toLowerCase().replace(/[^a-z0-9@._-]/g, "");
-    await store.setJSON(key, {
-      email,
-      subscribedAt: new Date().toISOString()
-    });
-
     const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
     if (webhookUrl) {
-      try {
-        await fetch(webhookUrl, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, timestamp: new Date().toISOString() })
-        });
-        console.log("Zapier webhook sent for:", email);
-      } catch (zapErr) {
-        console.error("Zapier webhook failed:", zapErr);
-      }
+      const res = await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, timestamp: new Date().toISOString() })
+      });
+      console.log("Zapier response status:", res.status, "for:", email);
     } else {
-      console.warn("GOOGLE_SHEET_WEBHOOK_URL not set - skipping Zapier");
+      console.warn("GOOGLE_SHEET_WEBHOOK_URL not set");
     }
 
     return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
 
   } catch (error) {
-    console.error("Subscribe function error:", error);
-    return { statusCode: 500, headers, body: JSON.stringify({ error: "Internal server error" }) };
+    console.error("Subscribe error:", error.message);
+    return { statusCode: 500, headers, body: JSON.stringify({ error: "Server error" }) };
   }
 };
