@@ -41,7 +41,7 @@ const Contact = () => {
               My audience:
             </h3>
             <p style={{ color: '#E0E0E0', lineHeight: '1.8' }}>
-              <strong style={{ color: '#60E1E0' }}>7.9M views on one video.</strong> Moms (and some dads) who are tired of the polished influencer thing. They're here for validation, not perfection. Ages 25–45, mostly US-based, dealing with real life and looking for someone who says what they're thinking.
+              <strong style={{ color: '#60E1E0' }}>11M+ views on one video.</strong> Moms (and some dads) who are tired of the polished influencer thing. They're here for validation, not perfection. Ages 25–45, mostly US-based, dealing with real life and looking for someone who says what they're thinking.
             </p>
           </div>
 
