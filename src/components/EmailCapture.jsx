@@ -115,7 +115,7 @@ const EmailCapture = () => {
 
       {status === 'error' && (
         <p style={{ color: '#ff6b6b', marginTop: '1rem', fontSize: '0.875rem' }}>
-          Oops! Try again or email collab@jerrisworld.com
+          Oops! Try again or email collab@vvvdigitals.com
         </p>
       )}
     </div>
