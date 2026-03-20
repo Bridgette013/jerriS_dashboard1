@@ -1,4 +1,6 @@
-export default async (request) => {
+const { getStore } = require("@netlify/blobs");
+
+exports.handler = async (event, context) => {
   const headers = {
     "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
@@ -6,50 +8,48 @@ export default async (request) => {
     "Access-Control-Allow-Methods": "POST, OPTIONS"
   };
 
-  if (request.method === "OPTIONS") {
-    return new Response("", { status: 200, headers });
+  if (event.httpMethod === "OPTIONS") {
+    return { statusCode: 200, headers, body: "" };
   }
 
-  if (request.method !== "POST") {
-    return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405,
-      headers
-    });
+  if (event.httpMethod !== "POST") {
+    return { statusCode: 405, headers, body: JSON.stringify({ error: "Method not allowed" }) };
   }
 
   try {
-    const body = await request.json();
+    const body = JSON.parse(event.body);
     const { email } = body;
 
     if (!email || !email.includes("@")) {
-      return new Response(JSON.stringify({ error: "Valid email required" }), {
-        status: 400,
-        headers
-      });
+      return { statusCode: 400, headers, body: JSON.stringify({ error: "Valid email required" }) };
     }
 
-    const GOOGLE_SHEET_URL = process.env.GOOGLE_SHEET_WEBHOOK_URL;
-
-    await fetch(GOOGLE_SHEET_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        email,
-        timestamp: new Date().toISOString(),
-        source: "website-viral-8.5M"
-      })
+    const store = getStore("subscribers");
+    const key = email.toLowerCase().replace(/[^a-z0-9@._-]/g, "");
+    await store.setJSON(key, {
+      email,
+      subscribedAt: new Date().toISOString()
     });
 
-    return new Response(JSON.stringify({ success: true }), {
-      status: 200,
-      headers
-    });
+    const webhookUrl = process.env.GOOGLE_SHEET_WEBHOOK_URL;
+    if (webhookUrl) {
+      try {
+        await fetch(webhookUrl, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email, timestamp: new Date().toISOString() })
+        });
+      } catch (zapErr) {
+        console.error("Zapier webhook failed:", zapErr);
+      }
+    } else {
+      console.warn("GOOGLE_SHEET_WEBHOOK_URL not set — skipping Zapier");
+    }
+
+    return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
 
   } catch (error) {
     console.error("Subscribe function error:", error);
-    return new Response(JSON.stringify({ error: "Internal server error" }), {
-      status: 500,
-      headers
-    });
+    return { statusCode: 500, headers, body: JSON.stringify({ error: "Internal server error" }) };
   }
 };
