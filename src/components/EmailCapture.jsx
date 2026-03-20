@@ -50,7 +50,7 @@ const EmailCapture = () => {
         fontSize: '0.75rem',
         fontWeight: '700',
       }}>
-        11M+ SAW THE VIDEO
+        8.5M VIEWERS THIS MONTH
       </div>
       <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem', color: '#fff' }}>
         Grab the Free Survival Checklist
