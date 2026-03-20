@@ -60,9 +60,14 @@ const EmailCapture = () => {
       </p>
 
       {status === 'success' ? (
-        <p style={{ color: '#60E1E0', fontWeight: '600', fontSize: '1.1rem' }}>
-          ✓ Check your inbox — your checklist is on the way!
-        </p>
+        <div style={{ textAlign: 'center' }}>
+          <p style={{ color: '#60E1E0', fontWeight: '600', fontSize: '1.1rem', marginBottom: '0.75rem' }}>
+            ✓ You're in!
+          </p>
+          <a href="/checklist" style={{ color: '#fff', background: '#0A0A0A', padding: '0.75rem 2rem', borderRadius: '8px', fontWeight: '600', textDecoration: 'none', display: 'inline-block' }}>
+            Open Your Survival Checklist →
+          </a>
+        </div>
       ) : (
         <form onSubmit={handleSubmit} style={{
           display: 'flex',
