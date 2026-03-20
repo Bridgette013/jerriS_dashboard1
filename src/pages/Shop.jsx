@@ -6,25 +6,25 @@ const shopCategories = [
     items: [
       {
         title: 'Spectra S1 Breast Pump (Rechargeable)',
-        link: 'https://www.amazon.com/dp/B00DBKFFJM?tag=jerriwinters-20',
+        link: '/go/spectra-s1',
         price: '$199.99',
         note: 'Hospital grade, portable, rechargeable - the one every mom recommends'
       },
       {
         title: 'Earth Mama Organic Nipple Butter',
-        link: 'https://www.amazon.com/dp/B000JVCBBG?tag=jerriwinters-20',
+        link: '/go/nipple-butter',
         price: '$11.99',
         note: 'Lanolin-free, no need to wipe off before nursing. Buy two.'
       },
       {
         title: 'My Brest Friend Nursing Pillow (Deluxe)',
-        link: 'https://www.amazon.com/dp/B00PC3K7OE?tag=jerriwinters-20',
+        link: '/go/nursing-pillow',
         price: '$44.99',
         note: 'Flat & firm - way better than the Boppy for actual breastfeeding'
       },
       {
         title: 'Mama Bear Diapers (Size 3, 92ct)',
-        link: 'https://www.amazon.com/s?k=mama+bear+diapers&tag=jerriwinters-20',
+        link: '/go/mama-bear-diapers',
         price: '$24.99',
         note: 'Amazon brand, surprisingly good quality, way cheaper than Huggies'
       },
@@ -35,19 +35,19 @@ const shopCategories = [
     items: [
       {
         title: 'ChongErfei Compression Garment',
-        link: 'https://www.amazon.com/s?k=ChongErfei+compression+garment+postpartum&tag=jerriwinters-20',
+        link: '/go/compression-garment',
         price: '$29.99',
         note: 'Essential for tummy tuck recovery - wore this for weeks'
       },
       {
         title: 'ScarAway Silicone Scar Sheets',
-        link: 'https://www.amazon.com/s?k=ScarAway+silicone+scar+sheets&tag=jerriwinters-20',
+        link: '/go/scar-sheets',
         price: '$19.99',
         note: 'Actually flattens scars - doctor recommended'
       },
       {
         title: 'Frida Mom Postpartum Recovery Kit',
-        link: 'https://www.amazon.com/s?k=frida+mom+postpartum+recovery+essentials&tag=jerriwinters-20',
+        link: '/go/frida-mom-kit',
         price: '$49.99',
         note: 'Everything you need for recovery in one box'
       },
@@ -58,13 +58,13 @@ const shopCategories = [
     items: [
       {
         title: 'Bentgo Kids Lunch Box (5-Compartment)',
-        link: 'https://www.amazon.com/dp/B00PKNO7HO?tag=jerriwinters-20',
+        link: '/go/bentgo-lunchbox',
         price: '$29.99',
         note: 'Leak-proof, drop-proof, dishwasher safe - survives all 4 kids'
       },
       {
         title: 'Graco 4Ever Car Seat',
-        link: 'https://www.amazon.com/s?k=graco+4ever+car+seat&tag=jerriwinters-20',
+        link: '/go/graco-carseat',
         price: '$249.99',
         note: 'Grows with them from infant to booster - one seat, 10 years'
       },
@@ -75,13 +75,13 @@ const shopCategories = [
     items: [
       {
         title: 'Batiste Dry Shampoo',
-        link: 'https://www.amazon.com/s?k=batiste+dry+shampoo&tag=jerriwinters-20',
+        link: '/go/batiste-dry-shampoo',
         price: '$8.99',
         note: 'Day 3 hair? Nobody has to know.'
       },
       {
         title: "Not Your Mother's Dry Shampoo",
-        link: 'https://www.amazon.com/s?k=not+your+mothers+dry+shampoo&tag=jerriwinters-20',
+        link: '/go/nym-dry-shampoo',
         price: '$8.99',
         note: 'The other one we swear by'
       },
