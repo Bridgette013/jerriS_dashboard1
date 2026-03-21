@@ -97,7 +97,7 @@ const Shop = () => {
           fontFamily: 'Montserrat, sans-serif', 
           fontSize: '2rem', 
           marginBottom: '0.5rem',
-          background: 'linear-gradient(135deg, #C485FF 0%, #60E1E0 100%)',
+          background: 'linear-gradient(135deg, #ff3b3b 0%, #ffffff 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'
         }}>
@@ -118,7 +118,7 @@ const Shop = () => {
               <h2 style={{ 
                 fontSize: '1.25rem', 
                 marginBottom: '1rem',
-                color: '#C485FF'
+                color: '#ff3b3b'
               }}>
                 {category.name}
               </h2>
@@ -143,13 +143,13 @@ const Shop = () => {
                       transition: 'all 0.2s',
                       cursor: 'pointer',
                     }}
-                    onMouseEnter={(e) => e.currentTarget.style.borderColor = '#C485FF'}
+                    onMouseEnter={(e) => e.currentTarget.style.borderColor = '#ff3b3b'}
                     onMouseLeave={(e) => e.currentTarget.style.borderColor = '#2A2A2A'}
                   >
                     <span style={{ display: 'block', color: '#fff', fontWeight: '600', marginBottom: '0.25rem' }}>
                       {item.title}
                     </span>
-                    <span style={{ color: '#60E1E0', fontWeight: '700', display: 'block', marginBottom: '0.5rem' }}>
+                    <span style={{ color: '#ff3b3b', fontWeight: '700', display: 'block', marginBottom: '0.5rem' }}>
                       {item.price}
                     </span>
                     <span style={{ color: '#888', fontSize: '0.875rem', lineHeight: '1.4' }}>

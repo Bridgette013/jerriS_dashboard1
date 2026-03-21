@@ -31,11 +31,11 @@
   border-radius: 50%;
   margin: 0 auto 1rem;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--theme-primary, #5F00B8), var(--theme-accent, #C485FF));
+  background: linear-gradient(135deg, var(--theme-primary, #ff3b3b), var(--theme-accent, #ff3b3b));
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 20px rgba(95, 0, 184, 0.4);
+  box-shadow: 0 4px 20px rgba(255, 59, 59, 0.4);
 }
 
 .profile-avatar img {
@@ -56,7 +56,7 @@
   font-size: 1.75rem;
   font-weight: 700;
   margin: 0 0 0.5rem;
-  background: linear-gradient(135deg, var(--theme-accent, #C485FF), #60E1E0);
+  background: linear-gradient(135deg, var(--theme-accent, #ff3b3b), #ffffff);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -98,9 +98,9 @@
 }
 
 .social-icon:hover {
-  background: var(--theme-primary, #5F00B8);
+  background: var(--theme-primary, #ff3b3b);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(95, 0, 184, 0.4);
+  box-shadow: 0 4px 12px rgba(255, 59, 59, 0.4);
 }
 
 /* Quick Links Buttons */
@@ -127,10 +127,10 @@
 }
 
 .link-button:hover {
-  background: var(--theme-primary, #5F00B8);
-  border-color: var(--theme-primary, #5F00B8);
+  background: var(--theme-primary, #ff3b3b);
+  border-color: var(--theme-primary, #ff3b3b);
   transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(95, 0, 184, 0.4);
+  box-shadow: 0 4px 16px rgba(255, 59, 59, 0.4);
 }
 
 /* Shop My Favorites Section */
@@ -146,7 +146,7 @@
   margin: 0 0 1rem;
   padding-bottom: 0.5rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--theme-accent, #C485FF);
+  color: var(--theme-accent, #ff3b3b);
 }
 
 .products-grid {
@@ -167,9 +167,9 @@
 }
 
 .product-card:hover {
-  border-color: var(--theme-primary, #5F00B8);
+  border-color: var(--theme-primary, #ff3b3b);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(95, 0, 184, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 59, 59, 0.3);
 }
 
 .product-name {

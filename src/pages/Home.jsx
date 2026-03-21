@@ -77,7 +77,7 @@ function Home() {
               <span className="stat-txt">VIRAL VIEWS</span>
             </div>
             <div className="floating-badge floating-4">
-              <span>💜</span>
+              <span>❤️</span>
             </div>
 
             {/* Decorative elements */}
@@ -94,12 +94,13 @@ function Home() {
       {/* Viral Video Section */}
       <section className="viral-section" style={{
         padding: '4rem 2rem',
-        background: 'linear-gradient(135deg, #1a0033 0%, #0a0a0a 100%)',
+        background: 'linear-gradient(135deg, #1a0000 0%, #0a0a0a 100%)',
       }}>
         <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
           <div style={{
             display: 'inline-block',
-            background: 'linear-gradient(135deg, #C485FF 0%, #60E1E0 100%)',
+            background: 'linear-gradient(135deg, #ff3b3b 0%, #ffffff 100%)',
+            color: '#0a0a0a',
             padding: '0.5rem 1.5rem',
             borderRadius: '20px',
             marginBottom: '1rem',
@@ -121,7 +122,7 @@ function Home() {
             margin: '0 auto',
             borderRadius: '12px',
             overflow: 'hidden',
-            boxShadow: '0 20px 60px rgba(196, 133, 255, 0.3)',
+            boxShadow: '0 20px 60px rgba(255, 59, 59, 0.3)',
           }}>
             <iframe
               width="100%"
@@ -140,7 +141,7 @@ function Home() {
             gap: '2rem',
             justifyContent: 'center',
             flexWrap: 'wrap',
-            color: '#C485FF',
+            color: '#ff3b3b',
             fontSize: '0.875rem',
             fontWeight: '600',
           }}>
@@ -255,7 +256,7 @@ function Home() {
             <span className="link-arrow">→</span>
           </Link>
           <Link to="/about" className="link-card">
-            <div className="link-icon">💜</div>
+            <div className="link-icon">❤️</div>
             <div className="link-content">
               <h3>My Story</h3>
               <p>How I got here and why I share it all</p>
@@ -279,7 +280,7 @@ function Home() {
           <h2>Ready to join the chaos?</h2>
           <p>Follow along for the realest content on the internet.</p>
           <a href="https://facebook.com/jerri.winters" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-large">
-            Follow Along 💜
+            Follow Along ❤️
           </a>
         </div>
         <div className="cta-decoration"></div>

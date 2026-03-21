@@ -4,15 +4,15 @@
 :root {
   --brand-onyx: #0A0A0A;
   --brand-carbon: #1F1F1F;
-  --brand-purple: #5F00B8;
-  --brand-lavender: #C485FF;
-  --brand-aqua: #60E1E0;
+  --brand-purple: #ff3b3b;
+  --brand-lavender: #ff3b3b;
+  --brand-aqua: #ffffff;
   --brand-grey: #E0E0E0;
   --brand-white: #FFFFFF;
   
-  --brand-primary: #5F00B8;
-  --brand-accent: #60E1E0;
-  --brand-success: #60E1E0;
+  --brand-primary: #ff3b3b;
+  --brand-accent: #ffffff;
+  --brand-success: #ff3b3b;
   --brand-surface: #1F1F1F;
   --brand-surface-hover: #2A2A2A;
   --brand-text: #FFFFFF;
@@ -24,7 +24,7 @@
   --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
   --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
   --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
-  --shadow-glow: 0 0 20px rgba(95, 0, 184, 0.3);
+  --shadow-glow: 0 0 20px rgba(255, 59, 59, 0.3);
   
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -106,7 +106,7 @@ body {
 }
 
 .header-cta {
-  background: linear-gradient(135deg, var(--brand-purple), #7B2FD4);
+  background: linear-gradient(135deg, var(--brand-purple), #cc0000);
   color: white;
   padding: 0.75rem 1.5rem;
   border-radius: var(--radius-sm);
@@ -194,7 +194,7 @@ body {
      SHARED BUTTON STYLES
      =================== */
 .btn-primary {
-  background: linear-gradient(135deg, var(--brand-purple), #7B2FD4);
+  background: linear-gradient(135deg, var(--brand-purple), #cc0000);
   color: white;
   border: none;
   padding: 0.75rem 1.5rem;

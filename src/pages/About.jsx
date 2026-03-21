@@ -9,7 +9,7 @@ const About = () => {
           fontFamily: 'Montserrat, sans-serif',
           fontSize: '2rem',
           marginBottom: '1.5rem',
-          background: 'linear-gradient(135deg, #C485FF 0%, #60E1E0 100%)',
+          background: 'linear-gradient(135deg, #ff3b3b 0%, #ffffff 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent'
         }}>

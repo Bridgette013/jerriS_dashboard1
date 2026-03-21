@@ -63,7 +63,7 @@ const NotFound = () => (
     <h1 style={{
       fontFamily: 'Montserrat, sans-serif',
       fontSize: '4rem',
-      background: 'linear-gradient(135deg, #C485FF, #60E1E0)',
+      background: 'linear-gradient(135deg, #ff3b3b, #ffffff)',
       WebkitBackgroundClip: 'text',
       WebkitTextFillColor: 'transparent',
       marginBottom: '0.5rem'
@@ -77,7 +77,7 @@ const NotFound = () => (
     </p>
     <Link to="/" style={{
       display: 'inline-block',
-      background: 'linear-gradient(135deg, #5F00B8, #7B2FD4)',
+      background: 'linear-gradient(135deg, #ff3b3b, #cc0000)',
       color: 'white',
       padding: '0.75rem 1.5rem',
       borderRadius: '8px',

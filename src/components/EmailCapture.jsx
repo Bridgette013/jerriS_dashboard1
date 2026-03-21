@@ -30,12 +30,12 @@ const EmailCapture = () => {
 
   return (
     <div style={{
-      background: 'linear-gradient(135deg, #5F00B8 0%, #7B2FD4 100%)',
+      background: 'linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%)',
       padding: '3rem 2rem',
       borderRadius: '12px',
       textAlign: 'center',
       marginTop: '2rem',
-      border: '2px solid #C485FF',
+      border: '2px solid #ff3b3b',
       position: 'relative',
       overflow: 'hidden',
     }}>
@@ -43,8 +43,8 @@ const EmailCapture = () => {
         position: 'absolute',
         top: '-10px',
         right: '20px',
-        background: '#60E1E0',
-        color: '#0A0A0A',
+        background: '#ff3b3b',
+        color: '#ffffff',
         padding: '0.25rem 0.75rem',
         borderRadius: '12px',
         fontSize: '0.75rem',
@@ -61,10 +61,10 @@ const EmailCapture = () => {
 
       {status === 'success' ? (
         <div style={{ textAlign: 'center' }}>
-          <p style={{ color: '#60E1E0', fontWeight: '600', fontSize: '1.1rem', marginBottom: '0.75rem' }}>
+          <p style={{ color: '#ff3b3b', fontWeight: '600', fontSize: '1.1rem', marginBottom: '0.75rem' }}>
             ✓ You're in!
           </p>
-          <a href="/checklist" style={{ color: '#fff', background: '#0A0A0A', padding: '0.75rem 2rem', borderRadius: '8px', fontWeight: '600', textDecoration: 'none', display: 'inline-block' }}>
+          <a href="/checklist" style={{ color: '#fff', background: '#0A0A0A', padding: '0.75rem 2rem', borderRadius: '8px', fontWeight: '600', textDecoration: 'none', display: 'inline-block', border: '2px solid #ff3b3b' }}>
             Open Your Survival Checklist →
           </a>
         </div>

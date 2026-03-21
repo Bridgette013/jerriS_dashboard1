@@ -22,8 +22,8 @@ const defaultSettings = {
     { id: 3, title: 'Collabs & Contact', url: '/contact', enabled: true },
   ],
   theme: {
-    primaryColor: '#5F00B8',
-    accentColor: '#C485FF',
+    primaryColor: '#ff3b3b',
+    accentColor: '#ff3b3b',
     backgroundColor: '#0A0A0A',
     cardColor: '#1F1F1F',
     textColor: '#FFFFFF',

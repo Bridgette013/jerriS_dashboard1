@@ -1,7 +1,7 @@
 /* ==========================================
    JERRI S. HOME PAGE
    Vibe: Editorial, warm, playful, layered
-   Palette: Purple (#5F00B8), Lavender (#C485FF), Aqua (#60E1E0)
+   Palette: Red (#ff3b3b), Black (#0a0a0a), White (#ffffff)
    ========================================== */
 
 * {
@@ -12,7 +12,7 @@
 
 .home-page {
   min-height: 100vh;
-  background: linear-gradient(180deg, #faf8ff 0%, #f5f0ff 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f5f5f5 100%);
   overflow-x: hidden;
   font-family: 'Poppins', sans-serif;
 }
@@ -38,7 +38,7 @@
 .shape-1 {
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(196, 133, 255, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 59, 59, 0.15) 0%, transparent 70%);
   top: -150px;
   right: -100px;
 }
@@ -46,7 +46,7 @@
 .shape-2 {
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(96, 225, 224, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
   bottom: 0;
   left: -100px;
 }
@@ -58,7 +58,7 @@
   right: 5%;
   width: 200px;
   height: 250px;
-  border: 2px solid rgba(95, 0, 184, 0.08);
+  border: 2px solid rgba(255, 59, 59, 0.08);
   pointer-events: none;
 }
 
@@ -69,7 +69,7 @@
   left: 20px;
   right: -20px;
   bottom: -20px;
-  border: 2px solid rgba(95, 0, 184, 0.05);
+  border: 2px solid rgba(255, 59, 59, 0.05);
 }
 
 /* Hero Container - Split Layout */
@@ -111,7 +111,7 @@
 .hero-greeting {
   font-family: 'Dancing Script', cursive;
   font-size: 2rem;
-  color: #5F00B8;
+  color: #ff3b3b;
   margin-bottom: 0.5rem;
 }
 
@@ -137,7 +137,7 @@
 }
 
 .headline-accent {
-  color: #5F00B8;
+  color: #ff3b3b;
 }
 
 .hero-tagline {
@@ -166,7 +166,7 @@
 }
 
 .hero-bio em {
-  color: #5F00B8;
+  color: #ff3b3b;
   font-style: italic;
 }
 
@@ -199,25 +199,25 @@
 }
 
 .btn-primary {
-  background: #5F00B8;
+  background: #ff3b3b;
   color: white;
-  box-shadow: 0 4px 20px rgba(95, 0, 184, 0.25);
+  box-shadow: 0 4px 20px rgba(255, 59, 59, 0.25);
 }
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(95, 0, 184, 0.35);
-  background: #7a1fd4;
+  box-shadow: 0 8px 30px rgba(255, 59, 59, 0.35);
+  background: #cc0000;
 }
 
 .btn-outline {
   background: transparent;
-  color: #5F00B8;
-  border-color: #5F00B8;
+  color: #ff3b3b;
+  border-color: #ff3b3b;
 }
 
 .btn-outline:hover {
-  background: #5F00B8;
+  background: #ff3b3b;
   color: white;
 }
 
@@ -266,7 +266,7 @@
   justify-content: center;
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
   transition: all 0.3s ease;
-  color: #5F00B8;
+  color: #ff3b3b;
 }
 
 .social-icon svg {
@@ -276,8 +276,8 @@
 
 .social-icon:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(95, 0, 184, 0.2);
-  background: #5F00B8;
+  box-shadow: 0 8px 25px rgba(255, 59, 59, 0.2);
+  background: #ff3b3b;
   color: white;
 }
 
@@ -304,7 +304,7 @@
   position: absolute;
   width: 350px;
   height: 420px;
-  background: linear-gradient(180deg, #efe4ff 0%, #e0d0f5 100%);
+  background: linear-gradient(180deg, #f5f5f5 0%, #e0e0e0 100%);
   border-radius: 60% 40% 50% 50% / 50% 50% 50% 50%;
   z-index: 0;
 }
@@ -324,7 +324,7 @@
   height: 350px;
   border-radius: 140px 140px 30px 30px;
   overflow: hidden;
-  box-shadow: 0 25px 60px rgba(95, 0, 184, 0.15);
+  box-shadow: 0 25px 60px rgba(255, 59, 59, 0.15);
 }
 
 @media (min-width: 768px) {
@@ -395,7 +395,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
   font-weight: 700;
-  color: #5F00B8;
+  color: #ff3b3b;
 }
 
 .stat-txt {
@@ -410,12 +410,12 @@
   left: 10%;
   width: 50px;
   height: 50px;
-  background: linear-gradient(135deg, #60E1E0, #40c9c8);
+  background: linear-gradient(135deg, #ffffff, #cc0000);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 25px rgba(96, 225, 224, 0.3);
+  box-shadow: 0 8px 25px rgba(255, 255, 255, 0.3);
   z-index: 2;
   animation: float 3s ease-in-out infinite;
   animation-delay: 0.4s;
@@ -434,7 +434,7 @@
   right: 15%;
   width: 60px;
   height: 60px;
-  background-image: radial-gradient(#C485FF 2px, transparent 2px);
+  background-image: radial-gradient(#ff3b3b 2px, transparent 2px);
   background-size: 12px 12px;
   opacity: 0.5;
 }
@@ -444,7 +444,7 @@
   bottom: 30%;
   left: -5%;
   width: 80px;
-  color: rgba(95, 0, 184, 0.2);
+  color: rgba(255, 59, 59, 0.2);
 }
 
 /* ==========================================
@@ -494,7 +494,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 2.5rem;
   font-weight: 700;
-  color: #5F00B8;
+  color: #ff3b3b;
   line-height: 1.1;
 }
 
@@ -511,7 +511,7 @@
 
 .crew-section {
   padding: 5rem 2rem;
-  background: linear-gradient(180deg, white 0%, #faf8ff 100%);
+  background: linear-gradient(180deg, white 0%, #ffffff 100%);
 }
 
 .section-header {
@@ -522,7 +522,7 @@
 .section-eyebrow {
   font-family: 'Dancing Script', cursive;
   font-size: 1.5rem;
-  color: #5F00B8;
+  color: #ff3b3b;
   margin-bottom: 0.25rem;
 }
 
@@ -555,7 +555,7 @@
 .crew-card {
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(95, 0, 184, 0.1);
+  box-shadow: 0 10px 30px rgba(255, 59, 59, 0.1);
   transition: transform 0.3s ease;
 }
 
@@ -614,7 +614,7 @@
 }
 
 .crew-list span {
-  color: #5F00B8;
+  color: #ff3b3b;
   font-weight: 500;
 }
 
@@ -625,7 +625,7 @@
 .quote-section {
   position: relative;
   padding: 6rem 2rem;
-  background: #f5f0ff;
+  background: #f5f5f5;
   overflow: hidden;
 }
 
@@ -636,7 +636,7 @@
   transform: translate(-50%, -50%);
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(196, 133, 255, 0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 59, 59, 0.15) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -651,7 +651,7 @@
   font-family: 'Playfair Display', serif;
   font-size: 8rem;
   line-height: 0.5;
-  color: rgba(95, 0, 184, 0.1);
+  color: rgba(255, 59, 59, 0.1);
   margin-bottom: 1rem;
 }
 
@@ -673,7 +673,7 @@
 }
 
 .quote-emphasis span {
-  color: #5F00B8;
+  color: #ff3b3b;
   position: relative;
   display: inline-block;
 }
@@ -685,7 +685,7 @@
   left: 0;
   right: 0;
   height: 10px;
-  background: rgba(96, 225, 224, 0.4);
+  background: rgba(255, 255, 255, 0.4);
   z-index: -1;
 }
 
@@ -711,7 +711,7 @@
   align-items: center;
   gap: 1.25rem;
   padding: 1.25rem 1.5rem;
-  background: #faf8ff;
+  background: #ffffff;
   border-radius: 16px;
   text-decoration: none;
   transition: all 0.3s ease;
@@ -719,7 +719,7 @@
 }
 
 .link-card:hover {
-  border-color: #5F00B8;
+  border-color: #ff3b3b;
   background: white;
   transform: translateX(5px);
 }
@@ -748,7 +748,7 @@
 
 .link-arrow {
   font-size: 1.25rem;
-  color: #5F00B8;
+  color: #ff3b3b;
   opacity: 0;
   transform: translateX(-10px);
   transition: all 0.3s ease;
@@ -766,7 +766,7 @@
 .cta-section {
   position: relative;
   padding: 5rem 2rem;
-  background: linear-gradient(180deg, white 0%, #f5f0ff 100%);
+  background: linear-gradient(180deg, white 0%, #f5f5f5 100%);
   text-align: center;
   overflow: hidden;
 }
@@ -796,7 +796,7 @@
   right: 10%;
   width: 150px;
   height: 150px;
-  background: radial-gradient(circle, rgba(96, 225, 224, 0.2) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
   pointer-events: none;
 }
 
