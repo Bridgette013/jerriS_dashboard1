@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, NavLink, Link } from 'react-router-dom';
 
 // Public pages
@@ -13,13 +13,25 @@ import Links from './pages/Links';
 import './App.css';
 
 const PublicLayout = ({ children }) => {
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 80);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   return (
     <div className="site">
-      <header className="site-header">
-        <div className="brand">
-          <span className="brand-title">Jerri S.</span>
-          <span className="brand-subtitle">The chaos. The clutter. The real.</span>
-        </div>
+      <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
+        <Link to="/" className="brand">
+          <img
+            src="/images/JerrisWorld_Logo_White.png"
+            alt="Jerri's World"
+            className="brand-logo"
+          />
+        </Link>
         <nav className="site-nav">
           <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
             Home

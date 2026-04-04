@@ -57,34 +57,49 @@ body {
 }
 
 .site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 3rem;
+  padding: 2rem 3rem;
   background: var(--brand-onyx);
   border-bottom: 4px solid var(--brand-divider);
+  transition: padding 0.35s ease, background 0.35s ease;
+}
+
+.site-header.scrolled {
+  padding: 0.75rem 3rem;
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(8px);
 }
 
 .brand {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
 }
 
-.brand-title {
-  font-family: 'Playfair Display', serif;
-  font-style: italic;
-  font-size: 2rem;
-  font-weight: 900;
-  color: var(--brand-white);
-  text-transform: uppercase;
-  letter-spacing: 1px;
+.brand-logo {
+  display: block;
+  height: 110px;
+  width: auto;
+  transition: height 0.35s ease;
+  filter: drop-shadow(3px 3px 0 var(--brand-primary));
 }
 
-.brand-subtitle {
-  font-family: 'Permanent Marker', cursive;
-  font-size: 0.9rem;
-  color: var(--brand-primary);
-  margin-top: -5px;
+.site-header.scrolled .brand-logo {
+  height: 48px;
+}
+
+@media (max-width: 768px) {
+  .brand-logo {
+    height: 70px;
+  }
+  .site-header.scrolled .brand-logo {
+    height: 40px;
+  }
 }
 
 .site-nav {
