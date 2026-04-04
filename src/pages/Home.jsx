@@ -7,38 +7,35 @@ function Home() {
     <div className="home-page">
       {/* Hero Section */}
       <section className="hero">
-        {/* Background decorations */}
-        <div className="hero-bg-shape shape-1"></div>
-        <div className="hero-bg-shape shape-2"></div>
-        <div className="hero-grid-lines"></div>
+        <div className="hero-bg-halftone"></div>
 
         <div className="hero-container">
           {/* Left side - Text content */}
           <div className="hero-content">
-            <p className="hero-greeting">Hey, I'm Jerri</p>
-            <h1 className="hero-headline">
-              Single Mom.<br />
-              Four Kids.<br />
-              <span className="headline-accent">Zero Filters.</span>
-            </h1>
-            <p className="hero-tagline">The chaos. The clutter. The real.</p>
+            <div className="sticker-badge">Welcome to</div>
+            <img
+              src="/images/JerrisWorld_Logo_White.png"
+              alt="Jerri's World"
+              className="hero-logo-img"
+            />
+            <p className="hero-tagline">Single Mom. Four Kids. Zero Filters.</p>
             <p className="hero-bio">
               I share the stuff most people won't—the breakdowns,
               the breakthroughs, and everything in between.
-              <em> Just imagine...</em> someone finally gets it.
+              <span className="marker-highlight"> Just imagine... someone finally gets it.</span>
             </p>
 
             <div className="hero-buttons">
               <a href="https://facebook.com/jerri.winters" target="_blank" rel="noopener noreferrer" className="btn btn-primary">
                 Follow Me
               </a>
-              <Link to="/contact" className="btn btn-outline">
+              <Link to="/contact" className="btn btn-secondary">
                 Work With Me
               </Link>
             </div>
 
             <div className="hero-social">
-              <span className="social-label">Check Out My</span>
+              <span className="social-label marker-font">Check Out My</span>
               <div className="social-line"></div>
               <div className="social-icons">
                 <a href="https://facebook.com/jerri.winters" target="_blank" rel="noopener noreferrer" className="social-icon">
@@ -56,7 +53,6 @@ function Home() {
 
           {/* Right side - Photo */}
           <div className="hero-image-wrapper">
-            <div className="image-blob"></div>
             <div className="image-frame">
               <img
                 src="/images/jerri-headshot.png"
@@ -66,64 +62,30 @@ function Home() {
             </div>
 
             {/* Floating elements around photo */}
-            <div className="floating-icon floating-1">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-            </div>
-            <div className="floating-icon floating-2">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-            </div>
-            <div className="floating-stat floating-3">
+            <div className="floating-stat neo-shadow-sm sticker-rotate-1">
               <span className="stat-num">21M+</span>
               <span className="stat-txt">VIRAL VIEWS</span>
             </div>
-            <div className="floating-badge floating-4">
-              <span>❤️</span>
-            </div>
-
-            {/* Decorative elements */}
-            <div className="deco-dots"></div>
-            <div className="deco-wave">
-              <svg viewBox="0 0 100 20" preserveAspectRatio="none">
-                <path d="M0,10 Q25,0 50,10 T100,10" stroke="currentColor" fill="none" strokeWidth="2"/>
-              </svg>
+            <div className="floating-badge neo-shadow-sm sticker-rotate-2">
+              <span>🔥</span>
             </div>
           </div>
         </div>
       </section>
 
       {/* Viral Video Section */}
-      <section className="viral-section" style={{
-        padding: '4rem 2rem',
-        background: 'linear-gradient(135deg, #1a0000 0%, #0a0a0a 100%)',
-      }}>
-        <div style={{ maxWidth: '1200px', margin: '0 auto', textAlign: 'center' }}>
-          <div style={{
-            display: 'inline-block',
-            background: 'linear-gradient(135deg, #ff3b3b 0%, #ffffff 100%)',
-            color: '#0a0a0a',
-            padding: '0.5rem 1.5rem',
-            borderRadius: '20px',
-            marginBottom: '1rem',
-            fontSize: '0.875rem',
-            fontWeight: '700',
-            letterSpacing: '0.05em',
-            animation: 'pulse 2s ease-in-out infinite',
-          }}>
+      <section className="viral-section neo-border-top">
+        <div className="viral-container">
+          <div className="viral-badge">
             🔥 16.9M VIEWS THIS MONTH
           </div>
-          <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem', color: '#fff' }}>
+          <h2 className="serif-glam title-glow">
             The Video That Broke the Internet
           </h2>
-          <p style={{ color: '#888', marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem' }}>
+          <p className="viral-desc">
             When your kid gets stuck in a baby swing and firefighters have to rescue her. Real life. Real funny. Really viral.
           </p>
-          <div style={{
-            maxWidth: '600px',
-            margin: '0 auto',
-            borderRadius: '12px',
-            overflow: 'hidden',
-            boxShadow: '0 20px 60px rgba(255, 59, 59, 0.3)',
-          }}>
+          <div className="video-frame neo-shadow">
             <iframe
               width="100%"
               height="400"
@@ -135,16 +97,7 @@ function Home() {
               style={{ display: 'block' }}
             />
           </div>
-          <div style={{
-            marginTop: '2rem',
-            display: 'flex',
-            gap: '2rem',
-            justifyContent: 'center',
-            flexWrap: 'wrap',
-            color: '#ff3b3b',
-            fontSize: '0.875rem',
-            fontWeight: '600',
-          }}>
+          <div className="viral-stats marker-font">
             <span>👀 8.5M Unique Viewers</span>
             <span>❤️ 95K+ Likes</span>
             <span>💬 1.5K+ Comments</span>
@@ -154,17 +107,12 @@ function Home() {
       </section>
 
       {/* Email Signup */}
-      <section style={{ padding: '2rem', maxWidth: '800px', margin: '0 auto' }}>
+      <section className="email-section neo-border-top">
         <EmailCapture />
       </section>
 
-      {/* Stats Wave Section */}
-      <section className="stats-section">
-        <div className="wave-divider">
-          <svg viewBox="0 0 1200 120" preserveAspectRatio="none">
-            <path d="M0,60 C300,120 600,0 900,60 C1050,90 1150,60 1200,60 L1200,120 L0,120 Z" fill="currentColor"/>
-          </svg>
-        </div>
+      {/* Stats Section */}
+      <section className="stats-section neo-border-top-bottom">
         <div className="stats-container">
           <div className="stat-item">
             <span className="stat-number">21M+</span>
@@ -188,12 +136,12 @@ function Home() {
       {/* Meet The Crew */}
       <section className="crew-section">
         <div className="section-header">
-          <p className="section-eyebrow">The Real Stars</p>
+          <p className="section-eyebrow marker-font">The Real Stars</p>
           <h2 className="section-title">Meet the Crew</h2>
         </div>
 
         <div className="crew-grid">
-          <div className="crew-card large">
+          <div className="crew-card large neo-shadow">
             <div className="crew-card-inner">
               <img src="/images/jerri-baby.png" alt="Jerri with Jasper" />
               <div className="crew-info">
@@ -202,7 +150,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="crew-card">
+          <div className="crew-card neo-shadow">
             <div className="crew-card-inner">
               <img src="/images/crew-stack.png" alt="The kids" />
               <div className="crew-info">
@@ -211,7 +159,7 @@ function Home() {
               </div>
             </div>
           </div>
-          <div className="crew-card">
+          <div className="crew-card neo-shadow">
             <div className="crew-card-inner">
               <img src="/images/crew-bench.png" alt="Kids on bench" />
               <div className="crew-info">
@@ -229,9 +177,8 @@ function Home() {
 
       {/* Quote Section */}
       <section className="quote-section">
-        <div className="quote-bg-shape"></div>
-        <div className="quote-container">
-          <div className="quote-mark">"</div>
+        <div className="quote-container neo-shadow sticker-rotate-1">
+          <div className="quote-mark marker-font">"</div>
           <blockquote className="quote-text">
             I show the mess because I know you have one too. The dishes piled up.
             The tears in the car after drop-off. The days where you didn't brush
@@ -239,15 +186,15 @@ function Home() {
           </blockquote>
           <p className="quote-emphasis">
             You're not broken. You're not behind.<br />
-            <span>You're not alone.</span>
+            <span className="marker-highlight-red">You're not alone.</span>
           </p>
         </div>
       </section>
 
       {/* Quick Links */}
-      <section className="links-section">
+      <section className="links-section neo-border-top">
         <div className="links-container">
-          <Link to="/shop" className="link-card">
+          <Link to="/shop" className="link-card neo-shadow-hover">
             <div className="link-icon">🛒</div>
             <div className="link-content">
               <h3>Shop My Favorites</h3>
@@ -255,7 +202,7 @@ function Home() {
             </div>
             <span className="link-arrow">→</span>
           </Link>
-          <Link to="/about" className="link-card">
+          <Link to="/about" className="link-card neo-shadow-hover">
             <div className="link-icon">❤️</div>
             <div className="link-content">
               <h3>My Story</h3>
@@ -263,7 +210,7 @@ function Home() {
             </div>
             <span className="link-arrow">→</span>
           </Link>
-          <Link to="/contact" className="link-card">
+          <Link to="/contact" className="link-card neo-shadow-hover">
             <div className="link-icon">✉️</div>
             <div className="link-content">
               <h3>Work With Me</h3>
@@ -276,14 +223,13 @@ function Home() {
 
       {/* CTA Section */}
       <section className="cta-section">
-        <div className="cta-content">
-          <h2>Ready to join the chaos?</h2>
+        <div className="cta-content neo-box">
+          <h2 className="serif-glam">Ready to join the chaos?</h2>
           <p>Follow along for the realest content on the internet.</p>
           <a href="https://facebook.com/jerri.winters" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-large">
             Follow Along ❤️
           </a>
         </div>
-        <div className="cta-decoration"></div>
       </section>
 
     </div>

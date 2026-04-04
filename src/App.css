@@ -2,33 +2,33 @@
    JERRI S. BRAND VARIABLES
    =================== */
 :root {
-  --brand-onyx: #0A0A0A;
-  --brand-carbon: #1F1F1F;
+  --brand-onyx: #000000;
+  --brand-carbon: #111111;
   --brand-purple: #ff3b3b;
   --brand-lavender: #ff3b3b;
   --brand-aqua: #ffffff;
-  --brand-grey: #E0E0E0;
+  --brand-grey: #333333;
   --brand-white: #FFFFFF;
-  
+
   --brand-primary: #ff3b3b;
   --brand-accent: #ffffff;
   --brand-success: #ff3b3b;
-  --brand-surface: #1F1F1F;
-  --brand-surface-hover: #2A2A2A;
+  --brand-surface: #111111;
+  --brand-surface-hover: #222222;
   --brand-text: #FFFFFF;
   --brand-text-secondary: #E0E0E0;
   --brand-muted: #888888;
-  --brand-divider: #2A2A2A;
-  --brand-danger: #FF6B6B;
-  
-  --shadow-sm: 0 2px 4px rgba(0,0,0,0.3);
-  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
-  --shadow-lg: 0 8px 24px rgba(0,0,0,0.5);
-  --shadow-glow: 0 0 20px rgba(255, 59, 59, 0.3);
-  
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
+  --brand-divider: #333333;
+  --brand-danger: #ff3b3b;
+
+  --shadow-sm: 4px 4px 0px #ff3b3b;
+  --shadow-md: 6px 6px 0px #ff3b3b;
+  --shadow-lg: 8px 8px 0px #ff3b3b;
+  --shadow-glow: 6px 6px 0px #ffffff;
+
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
 }
 
 /* ===================
@@ -61,8 +61,8 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 1.5rem 3rem;
-  background: var(--brand-carbon);
-  border-bottom: 1px solid var(--brand-divider);
+  background: var(--brand-onyx);
+  border-bottom: 4px solid var(--brand-divider);
 }
 
 .brand {
@@ -71,18 +71,20 @@ body {
 }
 
 .brand-title {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.5rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--brand-lavender), var(--brand-aqua));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--brand-white);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .brand-subtitle {
-  font-size: 0.8rem;
-  color: var(--brand-muted);
+  font-family: 'Permanent Marker', cursive;
+  font-size: 0.9rem;
+  color: var(--brand-primary);
+  margin-top: -5px;
 }
 
 .site-nav {
@@ -93,38 +95,45 @@ body {
 .nav-link {
   color: var(--brand-text-secondary);
   text-decoration: none;
-  font-weight: 500;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
   transition: color 0.2s;
 }
 
 .nav-link:hover {
-  color: var(--brand-lavender);
+  color: var(--brand-primary);
 }
 
 .nav-link.active {
-  color: var(--brand-aqua);
+  color: var(--brand-white);
 }
 
 .header-cta {
-  background: linear-gradient(135deg, var(--brand-purple), #cc0000);
-  color: white;
+  background: var(--brand-white);
+  color: var(--brand-onyx);
   padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-sm);
+  border: 3px solid var(--brand-onyx);
+  box-shadow: 4px 4px 0px var(--brand-primary);
+  text-transform: uppercase;
   text-decoration: none;
-  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
   transition: all 0.2s;
 }
 
 .header-cta:hover {
-  box-shadow: var(--shadow-glow);
-  transform: translateY(-1px);
+  background: var(--brand-primary);
+  color: var(--brand-white);
+  box-shadow: 2px 2px 0px var(--brand-white);
+  transform: translate(2px, 2px);
 }
 
 .site-footer {
   margin-top: auto;
   padding: 2rem 3rem;
-  background: var(--brand-carbon);
-  border-top: 1px solid var(--brand-divider);
+  background: var(--brand-onyx);
+  border-top: 4px solid var(--brand-divider);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -132,8 +141,9 @@ body {
 
 .footer-title {
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  color: var(--brand-text);
+  font-weight: 900;
+  text-transform: uppercase;
+  color: var(--brand-white);
 }
 
 .footer-subtitle {
@@ -194,39 +204,45 @@ body {
      SHARED BUTTON STYLES
      =================== */
 .btn-primary {
-  background: linear-gradient(135deg, var(--brand-purple), #cc0000);
-  color: white;
-  border: none;
+  background: var(--brand-primary);
+  color: var(--brand-white);
+  border: 3px solid var(--brand-white);
+  box-shadow: 6px 6px 0px rgba(255, 255, 255, 0.2);
   padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-sm);
-  font-weight: 600;
+  border-radius: 0;
+  font-weight: 800;
+  text-transform: uppercase;
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: inherit;
+  font-family: 'Poppins', sans-serif;
 }
 
 .btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow: var(--shadow-glow);
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0px rgba(255, 255, 255, 0.4);
 }
 
 .btn-secondary {
-  background: transparent;
-  color: var(--brand-text-secondary);
-  border: 1px solid var(--brand-divider);
+  background: var(--brand-onyx);
+  color: var(--brand-white);
+  border: 3px solid var(--brand-divider);
+  box-shadow: 6px 6px 0px var(--brand-primary);
   padding: 0.75rem 1.5rem;
-  border-radius: var(--radius-sm);
-  font-weight: 500;
+  border-radius: 0;
+  font-weight: 800;
+  text-transform: uppercase;
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: inherit;
+  font-family: 'Poppins', sans-serif;
 }
 
 .btn-secondary:hover {
-  border-color: var(--brand-lavender);
-  color: var(--brand-text);
+  border-color: var(--brand-primary);
+  color: var(--brand-white);
+  transform: translate(2px, 2px);
+  box-shadow: 4px 4px 0px var(--brand-primary);
 }
 
 .btn-danger {
@@ -466,14 +482,13 @@ body {
 }
 
 .page-header h1 {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 1.75rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, var(--brand-lavender), var(--brand-aqua));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--brand-white);
   margin: 0;
+  text-transform: uppercase;
 }
 
 .page-header p {
