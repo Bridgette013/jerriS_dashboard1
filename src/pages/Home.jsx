@@ -85,11 +85,15 @@ function Home() {
           <div className="hero-image-wrapper">
             <div className="image-blob"></div>
             <div className="image-frame">
-              <img
-                src="/images/jerri-headshot.png"
-                alt="Jerri S."
-                className="hero-photo"
-              />
+              <picture>
+                <source srcSet="/images/jerri-headshot.webp" type="image/webp" />
+                <img
+                  src="/images/jerri-headshot.png"
+                  alt="Jerri S."
+                  className="hero-photo"
+                  fetchPriority="high"
+                />
+              </picture>
             </div>
 
             {/* Floating elements around photo */}
@@ -223,7 +227,10 @@ function Home() {
         <div className="crew-grid">
           <div className="crew-card large">
             <div className="crew-card-inner">
-              <img src="/images/jerri-baby.png" alt="Jerri with Jasper" />
+              <picture>
+                <source srcSet="/images/jerri-baby.webp" type="image/webp" />
+                <img src="/images/jerri-baby.png" alt="Jerri with Jasper" loading="lazy" />
+              </picture>
               <div className="crew-info">
                 <span className="crew-name">Jasper</span>
                 <span className="crew-role">The Baby • 3</span>
@@ -232,7 +239,10 @@ function Home() {
           </div>
           <div className="crew-card">
             <div className="crew-card-inner">
-              <img src="/images/crew-stack.png" alt="The kids" />
+              <picture>
+                <source srcSet="/images/crew-stack.webp" type="image/webp" />
+                <img src="/images/crew-stack.png" alt="The kids" loading="lazy" />
+              </picture>
               <div className="crew-info">
                 <span className="crew-name">The Squad</span>
                 <span className="crew-role">Partners in Crime</span>
@@ -241,7 +251,10 @@ function Home() {
           </div>
           <div className="crew-card">
             <div className="crew-card-inner">
-              <img src="/images/crew-bench.png" alt="Kids on bench" />
+              <picture>
+                <source srcSet="/images/crew-bench.webp" type="image/webp" />
+                <img src="/images/crew-bench.png" alt="Kids on bench" loading="lazy" />
+              </picture>
               <div className="crew-info">
                 <span className="crew-name">Crew Goals</span>
                 <span className="crew-role">Organized Chaos</span>

@@ -26,11 +26,14 @@ const PublicLayout = ({ children }) => {
     <div className="site">
       <header className={`site-header ${scrolled ? 'scrolled' : ''}`}>
         <Link to="/" className="brand">
-          <img
-            src="/images/JerrisWorld_Logo_White.png"
-            alt="Jerri's World"
-            className="brand-logo"
-          />
+          <picture>
+            <source srcSet="/images/JerrisWorld_Logo_White.webp" type="image/webp" />
+            <img
+              src="/images/JerrisWorld_Logo_White.png"
+              alt="Jerri's World"
+              className="brand-logo"
+            />
+          </picture>
         </Link>
         <nav className="site-nav">
           <NavLink to="/" className={({ isActive }) => `nav-link ${isActive ? 'active' : ''}`}>
