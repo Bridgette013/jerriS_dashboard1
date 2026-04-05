@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, lazy, Suspense } from 'react';
 import { Routes, Route, NavLink, Link } from 'react-router-dom';
 
-// Public pages
+// Home is eager-loaded — it's the LCP landing page
 import Home from './pages/Home';
-import Shop from './pages/Shop';
-import About from './pages/About';
-import Contact from './pages/Contact';
 
-// Public standalone pages
-import Links from './pages/Links';
+// Secondary pages are code-split and loaded on demand
+const Shop = lazy(() => import('./pages/Shop'));
+const About = lazy(() => import('./pages/About'));
+const Contact = lazy(() => import('./pages/Contact'));
+const Links = lazy(() => import('./pages/Links'));
 
 import './App.css';
 
@@ -104,8 +104,13 @@ const NotFound = () => (
 /* ============================================
    ROUTES — PUBLIC ONLY
    ============================================ */
+const RouteFallback = () => (
+  <div style={{ minHeight: '60vh' }} />
+);
+
 const App = () => {
   return (
+    <Suspense fallback={<RouteFallback />}>
     <Routes>
       <Route
         path="/"
@@ -153,6 +158,7 @@ const App = () => {
         }
       />
     </Routes>
+    </Suspense>
   );
 };
 

@@ -157,6 +157,7 @@ function Home() {
               src="https://www.youtube.com/embed/WddXxULi0sc"
               title="Viral Swing Video - 16.5M Views"
               frameBorder="0"
+              loading="lazy"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
               allowFullScreen
               style={{ display: 'block' }}
